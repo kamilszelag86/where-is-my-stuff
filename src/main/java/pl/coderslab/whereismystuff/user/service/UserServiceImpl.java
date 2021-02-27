@@ -8,10 +8,12 @@ import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.repository.RoleRepository;
 import pl.coderslab.whereismystuff.user.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
