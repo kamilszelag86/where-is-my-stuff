@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.whereismystuff.user.entity.User;
-import pl.coderslab.whereismystuff.user.service.CurrentUser;
+import pl.coderslab.whereismystuff.security.CurrentUser;
 import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.validation.Valid;
@@ -35,10 +35,16 @@ public class HomeController {
     @ResponseBody
     public String admin(@AuthenticationPrincipal CurrentUser currentUser) {
         User entityUser = currentUser.getUser();
-        return "Hello " + entityUser.getUsername();
+        return "Hello " + entityUser.getFirstName() + " " + entityUser.getLastName();
     }
 
-    @GetMapping("register")
+    @GetMapping("/about/test")
+    public String test(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        model.addAttribute("currentUser", currentUser);
+        return "admin/test";
+    }
+
+    @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
         return "admin/register";
@@ -50,7 +56,7 @@ public class HomeController {
             return "admin/register";
         }
         userService.saveUser(user);
-        return "/about";
+        return "redirect:/login";
     }
 
 }

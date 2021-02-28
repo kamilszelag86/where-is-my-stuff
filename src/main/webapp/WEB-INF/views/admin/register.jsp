@@ -14,8 +14,10 @@
 <body>
 <div>
     <form:form method="post" modelAttribute="user">
-        Login: <form:input path="username"/>
-        <form:errors path="username"/><br>
+        Imię: <form:input path="firstName"/>
+        Nazwisko: <form:input path="lastName"/>
+        Email: <form:input path="email"/>
+        <form:errors path="email"/><br>
         Hasło: <form:input path="password" type="password"/>
         <form:errors path="password"/><br>
         <input type="submit" value="Zarejestruj">

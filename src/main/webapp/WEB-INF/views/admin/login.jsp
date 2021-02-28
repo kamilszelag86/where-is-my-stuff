@@ -45,9 +45,9 @@
                                 </div>
                                 <form class="user" method="post">
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control form-control-user"
+                                        <input type="email" name="username" class="form-control form-control-user"
                                                id="exampleInputEmail"
-                                               aria-describedby="emailHelp" placeholder="Enter Login...">
+                                               aria-describedby="emailHelp" placeholder="Enter email...">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user"

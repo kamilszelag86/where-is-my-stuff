@@ -1,4 +1,4 @@
-package pl.coderslab.whereismystuff.user.service;
+package pl.coderslab.whereismystuff.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
