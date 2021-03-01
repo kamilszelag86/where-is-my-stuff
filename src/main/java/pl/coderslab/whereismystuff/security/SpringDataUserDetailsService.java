@@ -1,4 +1,4 @@
-package pl.coderslab.whereismystuff.user.service;
+package pl.coderslab.whereismystuff.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

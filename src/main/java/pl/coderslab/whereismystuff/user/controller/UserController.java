@@ -13,16 +13,5 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/create-user")
-    @ResponseBody
-    public String createUser() {
-        User user = new User();
-        user.setFirstName("Admin");
-        user.setLastName("Admiński");
-        user.setUsername("admin");
-        user.setPassword("admin");
-        userService.saveUser(user);
-        return "admin";
-    }
 
 }
