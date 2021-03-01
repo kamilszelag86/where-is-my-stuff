@@ -4,7 +4,7 @@ import pl.coderslab.whereismystuff.user.entity.User;
 
 public interface UserService {
 
-    User findByUserName(String userName);
+    User findByUsername(String username);
 
     void saveUser(User user);
 
