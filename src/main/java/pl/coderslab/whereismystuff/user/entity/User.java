@@ -2,9 +2,9 @@ package pl.coderslab.whereismystuff.user.entity;
 
 import lombok.Data;
 import pl.coderslab.whereismystuff.security.Role;
+import pl.coderslab.whereismystuff.user.validation.UniqueUsername;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
@@ -14,16 +14,20 @@ import java.util.Set;
 public class User {
 
     public static final String TABLE_NAME = "users";
+    public static final int ENABLED = 1;
+    public static final int DISABLED = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
     @Column(nullable = false, unique = true, length = 60)
     @NotBlank
-    @Email
-    private String email;
+    @UniqueUsername
+    private String username;
     @NotBlank
     private String password;
     private int enabled;

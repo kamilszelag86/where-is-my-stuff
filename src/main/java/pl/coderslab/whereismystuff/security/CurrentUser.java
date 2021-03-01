@@ -1,10 +1,12 @@
 package pl.coderslab.whereismystuff.security;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
+@Getter
 public class CurrentUser extends User {
 
     private final pl.coderslab.whereismystuff.user.entity.User user;
@@ -16,7 +18,4 @@ public class CurrentUser extends User {
         this.user = user;
     }
 
-    public pl.coderslab.whereismystuff.user.entity.User getUser() {
-        return user;
-    }
 }

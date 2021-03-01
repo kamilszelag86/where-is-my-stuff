@@ -16,7 +16,7 @@
 <h2>Witaj ${currentUser.user.firstName} ${currentUser.user.lastName}</h2><br>
 <h1>Zalogowano jako ${currentUser.username}</h1>
 <c:forEach items="${currentUser.authorities}" var="auth">
-    ${auth}
+    ${auth.authority}
 </c:forEach>
 
 </body>
