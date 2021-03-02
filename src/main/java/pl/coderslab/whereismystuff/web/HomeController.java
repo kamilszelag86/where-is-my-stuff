@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.coderslab.whereismystuff.user.entity.User;
+import pl.coderslab.whereismystuff.user.dto.UserDto;
+import pl.coderslab.whereismystuff.user.dto.UserDtoConverter;
 import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 public class HomeController {
 
     private final UserService userService;
+    private final UserDtoConverter userDtoConverter;
 
     @GetMapping
     public String home() {
@@ -24,16 +27,21 @@ public class HomeController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDto());
         return "admin/register";
     }
 
     @PostMapping("/register")
-    public String doRegister(@Valid User user, BindingResult result) {
+    public String doRegister(@ModelAttribute("user") @Valid UserDto user, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            if (result.hasGlobalErrors()) {
+                result.getGlobalErrors().stream()
+                        .filter(e -> e.getCode().equals("ConfirmedPassword"))
+                        .forEach(e -> model.addAttribute("confirmMessage", e.getDefaultMessage()));
+            }
             return "admin/register";
         }
-        userService.saveUser(user);
+        userService.saveUser(userDtoConverter.toEntity(user));
         return "redirect:/login";
     }
 

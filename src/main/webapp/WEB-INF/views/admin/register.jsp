@@ -39,13 +39,16 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <form:input path="password" cssClass="form-control form-control-user"
+                                    <form:input path="password" type="password"
+                                                cssClass="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password"/><br>
                                     <form:errors path="password" cssClass="alert-danger"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user"
-                                           id="exampleRepeatPassword" placeholder="Repeat Password">
+                                    <form:input path="confirmPassword" type="password"
+                                                class="form-control form-control-user"
+                                                id="exampleRepeatPassword" placeholder="Repeat Password"/><br>
+                                    <div class="alert-danger">${confirmMessage}</div>
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary btn-user btn-block"

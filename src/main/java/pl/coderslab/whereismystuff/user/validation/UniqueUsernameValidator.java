@@ -1,7 +1,6 @@
 package pl.coderslab.whereismystuff.user.validation;
 
 import lombok.RequiredArgsConstructor;
-import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.validation.ConstraintValidator;
@@ -13,7 +12,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
     private final UserService userService;
 
     @Override
-    public void initialize(UniqueUsername constraintAnnotation) {
+    public void initialize(UniqueUsername constraint) {
     }
 
     @Override

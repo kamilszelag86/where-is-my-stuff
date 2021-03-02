@@ -16,12 +16,16 @@
 <body>
 <h2><spring:message code="home.message"/></h2><br>
 <div>
-<sec:authorize access="isAuthenticated()">
-    <form action="<c:url value="/logout"/>" method="post">
-        <input class="fa fa-id-badge" type="submit" value="<spring:message  code="logout.button"/>">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-</sec:authorize>
+    <a href="<c:url value="/login"/>" class="btn">Zaloguj</a>
 </div>
-  </body>
+<br><br>
+<div>
+    <sec:authorize access="isAuthenticated()">
+        <form action="<c:url value="/logout"/>" method="post">
+            <input class="fa fa-id-badge" type="submit" value="<spring:message  code="logout.button"/>">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </sec:authorize>
+</div>
+</body>
 </html>

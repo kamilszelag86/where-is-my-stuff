@@ -20,15 +20,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+//    @NotBlank
     private String firstName;
-    @NotBlank
+//    @NotBlank
     private String lastName;
     @Column(nullable = false, unique = true, length = 60)
-    @NotBlank
-    @UniqueUsername
+//    @NotBlank
+//    @UniqueUsername
     private String username;
-    @NotBlank
+//    @NotBlank
     private String password;
     private int enabled;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
