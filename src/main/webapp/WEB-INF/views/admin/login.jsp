@@ -23,33 +23,30 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4"><spring:message code="login.welcome"/></h1>
                                 </div>
                                 <form class="user" method="post">
                                     <div class="form-group">
                                         <input type="text" name="username" class="form-control form-control-user"
                                                id="exampleInputEmail"
-                                               aria-describedby="emailHelp" placeholder="Enter username...">
+                                               aria-describedby="emailHelp"
+                                               placeholder="<spring:message code="form.username"/>">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user"
                                                id="exampleInputPassword"
-                                               placeholder="Password">
+                                               placeholder="<spring:message code="form.password"/>">
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                                     <input type="submit" value="<spring:message code="login.button"/>"
                                            class="btn btn-primary btn-user btn-block"/>
 
-                                    <hr>
-
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<forgot-password.html>">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="<c:url value="/register"/>">Create an Account!</a>
+                                    <a class="small" href="<c:url value="/register"/>"><spring:message
+                                            code="register.message"/> </a>
                                 </div>
                             </div>
                         </div>
