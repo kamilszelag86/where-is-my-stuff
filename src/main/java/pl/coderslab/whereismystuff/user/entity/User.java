@@ -2,10 +2,8 @@ package pl.coderslab.whereismystuff.user.entity;
 
 import lombok.Data;
 import pl.coderslab.whereismystuff.security.Role;
-import pl.coderslab.whereismystuff.user.validation.UniqueUsername;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -20,17 +18,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @NotBlank
+    //    @NotBlank
     private String firstName;
-//    @NotBlank
+    //    @NotBlank
     private String lastName;
     @Column(nullable = false, unique = true, length = 60)
 //    @NotBlank
 //    @UniqueUsername
     private String username;
-//    @NotBlank
+    //    @NotBlank
     private String password;
-    private int enabled;
+    private boolean enabled;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
