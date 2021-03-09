@@ -1,7 +1,6 @@
 package pl.coderslab.whereismystuff.category.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/app/category")
 public class CategoryController {
 
@@ -74,9 +72,7 @@ public class CategoryController {
 
     @GetMapping("/delete/{categoryId}")
     public String deleteConfirm(@PathVariable long categoryId, Model model) {
-        Category toDelete = categoryService.findById(categoryId).orElseThrow(() -> {
-            throw new EntityNotFoundException();
-        });
+        Category toDelete = categoryService.findById(categoryId).orElseThrow(EntityNotFoundException::new);
         if (!currentUser.getUser().equals(toDelete.getUser())) {
             throw new AccessDeniedException("Access denied");
         }

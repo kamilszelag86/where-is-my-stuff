@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<div>
+    Witaj ${currentUser.user.firstName}<br>
+    <a href="<c:url value="/app/location/add"/>">Dodaj lokalizację</a>
+    <br>
+</div>
 <table border="1">
     <c:forEach var="location" items="${locations}">
         <tr>

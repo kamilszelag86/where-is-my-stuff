@@ -7,6 +7,11 @@
     <title>Title</title>
 </head>
 <body>
+<div>
+    Witaj ${currentUser.user.firstName}<br>
+    <a href="<c:url value="/app/category/add"/>">Dodaj kategorię</a>
+    <br>
+</div>
 <table border="1">
     <c:forEach var="category" items="${categories}">
         <tr>

@@ -8,6 +8,7 @@ import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,7 +23,27 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void save(Item item) {
+    public Optional<Item> findById(long itemId) {
+        return itemRepository.findById(itemId);
+    }
+
+    @Override
+    public void create(Item item) {
         itemRepository.save(item);
     }
+
+    @Override
+    public void update(Item item) {
+        if (itemRepository.existsById(item.getId())) {
+            itemRepository.save(item);
+        }
+    }
+
+    @Override
+    public void delete(long itemId) {
+        if (itemRepository.existsById(itemId)) {
+            itemRepository.deleteById(itemId);
+        }
+    }
+
 }
