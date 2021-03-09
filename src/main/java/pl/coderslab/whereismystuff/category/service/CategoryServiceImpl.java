@@ -8,6 +8,7 @@ import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,8 +23,27 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Optional<Category> findById(long id) {
+        return categoryRepository.findById(id);
+    }
+
+    @Override
+    public void update(Category category) {
+        if (categoryRepository.existsById(category.getId())) {
+            categoryRepository.save(category);
+        }
+    }
+
+    @Override
     public void save(Category category) {
         categoryRepository.save(category);
+    }
+
+    @Override
+    public void delete(long categoryId) {
+        if (categoryRepository.existsById(categoryId)) {
+            categoryRepository.deleteById(categoryId);
+        }
     }
 
 }
