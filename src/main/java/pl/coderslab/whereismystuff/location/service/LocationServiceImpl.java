@@ -8,6 +8,7 @@ import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,8 +23,26 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public void save(Location location) {
+    public Optional<Location> findById(long id) {
+        return locationRepository.findById(id);
+    }
+
+    @Override
+    public void create(Location location) {
         locationRepository.save(location);
     }
 
+    @Override
+    public void update(Location location) {
+        if (locationRepository.existsById(location.getId())) {
+            locationRepository.save(location);
+        }
+    }
+
+    @Override
+    public void delete(long locationId) {
+        if (locationRepository.existsById(locationId)) {
+            locationRepository.deleteById(locationId);
+        }
+    }
 }
