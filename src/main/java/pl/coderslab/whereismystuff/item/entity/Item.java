@@ -30,7 +30,7 @@ public class Item {
     @NotNull
     private User user;
 
-    @OneToOne
+    @ManyToOne
     private Location location;
 
     @ManyToMany

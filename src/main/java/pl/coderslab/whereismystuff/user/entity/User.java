@@ -12,8 +12,6 @@ import java.util.Set;
 public class User {
 
     public static final String TABLE_NAME = "users";
-    public static final int ENABLED = 1;
-    public static final int DISABLED = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
