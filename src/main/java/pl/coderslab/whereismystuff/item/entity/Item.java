@@ -19,12 +19,13 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String name;
 
     private String description;
+    private String itemImage;
 
     @ManyToOne
     @NotNull
@@ -36,5 +37,11 @@ public class Item {
     @ManyToMany
     private List<Category> categories;
 
+    public String getItemImagePath() {
+        if (itemImage == null || id == null) {
+            return null;
+        }
+        return "/item-images/" + id + "/" + itemImage;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ItemService {
 
-    void create(Item item);
+    Item create(Item item);
 
     List<Item> findAllByUser(User user);
 

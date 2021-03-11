@@ -17,6 +17,7 @@
             <td>${item.name}</td>
             <td>${item.description}</td>
             <td>${item.location.name}</td>
+            <td><img src="<c:url value="${item.itemImagePath}"/>" height="80"/></td>
             <td><a href="<c:url value="/app/item/edit/${item.id}"/>">Edytuj</a>
                 <a href="<c:url value="/app/item/delete/${item.id}"/>">Usuń</a>
             </td>
