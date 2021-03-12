@@ -36,7 +36,7 @@ public class HomeController {
         if (result.hasErrors()) {
             if (result.hasGlobalErrors()) {
                 result.getGlobalErrors().stream()
-                        .filter(e -> e.getCode().equals("ConfirmedPassword"))
+                        .filter(e -> "ConfirmedPassword".equals(e.getCode()))
                         .forEach(e -> model.addAttribute("confirmMessage", e.getDefaultMessage()));
             }
             return "admin/register";

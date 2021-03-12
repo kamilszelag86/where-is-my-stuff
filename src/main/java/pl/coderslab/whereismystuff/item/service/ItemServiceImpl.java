@@ -6,9 +6,9 @@ import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,8 +23,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<Item> findById(long itemId) {
-        return itemRepository.findById(itemId);
+    public Item findById(long itemId) throws EntityNotFoundException {
+        return itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
