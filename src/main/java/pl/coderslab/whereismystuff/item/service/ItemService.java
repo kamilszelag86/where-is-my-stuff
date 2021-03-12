@@ -4,7 +4,6 @@ import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ItemService {
 
@@ -12,7 +11,7 @@ public interface ItemService {
 
     List<Item> findAllByUser(User user);
 
-    Optional<Item> findById(long itemId);
+    Item findById(long itemId);
 
     void update(Item item);
 

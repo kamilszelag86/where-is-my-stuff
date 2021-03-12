@@ -1,12 +1,14 @@
 package pl.coderslab.whereismystuff.category.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.service.CategoryService;
 import pl.coderslab.whereismystuff.security.CurrentUser;
@@ -51,14 +53,16 @@ public class CategoryController {
 
     @GetMapping("/edit/{categoryId}")
     public String editCategoryForm(@PathVariable long categoryId, Model model) {
-        Category category = categoryService.findById(categoryId).orElseThrow(() -> {
-            throw new EntityNotFoundException();
-        });
-        if (!currentUser.getUser().equals(category.getUser())) {
-            throw new AccessDeniedException("Access denied");
+        try {
+            Category toEdit = categoryService.findById(categoryId);
+            if (!currentUser.getUser().equals(toEdit.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("category", toEdit);
+            return "category/edit-form";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        model.addAttribute("category", category);
-        return "category/edit-form";
     }
 
     @PostMapping("/edit")
@@ -72,12 +76,16 @@ public class CategoryController {
 
     @GetMapping("/delete/{categoryId}")
     public String deleteConfirm(@PathVariable long categoryId, Model model) {
-        Category toDelete = categoryService.findById(categoryId).orElseThrow(EntityNotFoundException::new);
-        if (!currentUser.getUser().equals(toDelete.getUser())) {
-            throw new AccessDeniedException("Access denied");
+        try {
+            Category toDelete = categoryService.findById(categoryId);
+            if (!currentUser.getUser().equals(toDelete.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("categoryId", categoryId);
+            return "category/confirm";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        model.addAttribute("categoryId", categoryId);
-        return "category/confirm";
     }
 
     @PostMapping("/delete")

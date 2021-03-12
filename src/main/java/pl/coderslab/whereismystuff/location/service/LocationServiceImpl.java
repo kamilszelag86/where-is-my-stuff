@@ -6,9 +6,9 @@ import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.repository.LocationRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,8 +23,8 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Optional<Location> findById(long id) {
-        return locationRepository.findById(id);
+    public Location findById(long id) throws EntityNotFoundException {
+        return locationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -45,4 +45,5 @@ public class LocationServiceImpl implements LocationService {
             locationRepository.deleteById(locationId);
         }
     }
+
 }
