@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.security.Role;
-import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.security.RoleRepository;
+import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.repository.UserRepository;
 
 import javax.transaction.Transactional;

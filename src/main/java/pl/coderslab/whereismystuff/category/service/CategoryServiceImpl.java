@@ -6,9 +6,9 @@ import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.repository.CategoryRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,8 +23,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(long id) {
-        return categoryRepository.findById(id);
+    public Category findById(long id) throws EntityNotFoundException {
+        return categoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

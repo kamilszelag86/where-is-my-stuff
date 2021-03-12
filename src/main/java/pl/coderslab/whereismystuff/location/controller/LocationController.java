@@ -1,13 +1,14 @@
 package pl.coderslab.whereismystuff.location.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.method.P;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
 import pl.coderslab.whereismystuff.security.CurrentUser;
@@ -52,14 +53,16 @@ public class LocationController {
 
     @GetMapping("/edit/{locationId}")
     public String editForm(@PathVariable long locationId, Model model) {
-        Location toEdit = locationService.findById(locationId).orElseThrow(() -> {
-            throw new EntityNotFoundException();
-        });
-        if (!currentUser.getUser().equals(toEdit.getUser())) {
-            throw new AccessDeniedException("Access denied");
+        try {
+            Location toEdit = locationService.findById(locationId);
+            if (!currentUser.getUser().equals(toEdit.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("location", toEdit);
+            return "location/edit-form";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        model.addAttribute("location", toEdit);
-        return "location/edit-form";
     }
 
     @PostMapping("/edit")
@@ -73,14 +76,16 @@ public class LocationController {
 
     @GetMapping("/delete/{locationId}")
     public String deleteConfirm(@PathVariable long locationId, Model model) {
-        Location toDelete = locationService.findById(locationId).orElseThrow(() -> {
-            throw new EntityNotFoundException();
-        });
-        if (!currentUser.getUser().equals(toDelete.getUser())) {
-            throw new AccessDeniedException("Access denied");
+        try {
+            Location toDelete = locationService.findById(locationId);
+            if (!currentUser.getUser().equals(toDelete.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("locationId", locationId);
+            return "location/confirm";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        model.addAttribute("locationId", locationId);
-        return "location/confirm";
     }
 
     @PostMapping("/delete")
