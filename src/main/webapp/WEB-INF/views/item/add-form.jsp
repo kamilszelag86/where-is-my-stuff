@@ -28,8 +28,8 @@
                     Opis:<br>
                     <form:input path="description"/><br><br>
                     Lokalizacja:<br>
-                    <form:select path="location.id">
-                        <form:option value="" label="--Wybierz lokalizację--"/>
+                    <form:select path="location">
+                        <form:option value="0" label="--Wybierz lokalizację--"/>
                         <form:options items="${locations}" itemLabel="name" itemValue="id"/>
                     </form:select><br><br>
                     Kategorie:<br>

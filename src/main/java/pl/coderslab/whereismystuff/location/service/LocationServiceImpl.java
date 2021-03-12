@@ -45,4 +45,5 @@ public class LocationServiceImpl implements LocationService {
             locationRepository.deleteById(locationId);
         }
     }
+
 }

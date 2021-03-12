@@ -29,7 +29,10 @@
                     Opis:<br>
                     <form:input path="description"/><br><br>
                     Lokalizacja:<br>
-                    <form:select path="location.id" items="${locations}" itemLabel="name" itemValue="id"/><br><br>
+                    <form:select path="location">
+                        <form:option value="0" label="--Wybierz lokalizację--"/>
+                        <form:options items="${locations}" itemLabel="name" itemValue="id"/>
+                    </form:select><br><br>
                     Kategorie:<br>
                     <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
