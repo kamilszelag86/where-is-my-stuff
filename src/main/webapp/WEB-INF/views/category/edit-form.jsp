@@ -16,10 +16,10 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Dodaj nową kategorię</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edytuj kategorię</h6>
         </div>
         <div class="card-body">
-            <div class="chart-bar">
+            <div class="table-responsive">
                 <form:form method="post" action="./" modelAttribute="category">
                     <form:hidden path="user.id" value="${currentUser.user.id}"/>
                     <form:hidden path="id"/>

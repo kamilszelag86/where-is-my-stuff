@@ -19,7 +19,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Dodaj nowy przedmiot</h6>
         </div>
         <div class="card-body">
-            <div class="chart-bar">
+            <div class="table-responsive">
                 <form:form method="post" modelAttribute="item">
                     <form:hidden path="user.id" value="${currentUser.user.id}"/>
                     Nazwa:<br>
@@ -28,9 +28,12 @@
                     Opis:<br>
                     <form:input path="description"/><br><br>
                     Lokalizacja:<br>
-                    <form:select path="location.id" items="${locations}" itemLabel="name" itemValue="id"/><br><br>
+                    <form:select path="location.id">
+                        <form:option value="" label="--Wybierz lokalizację--"/>
+                        <form:options items="${locations}" itemLabel="name" itemValue="id"/>
+                    </form:select><br><br>
                     Kategorie:<br>
-                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id"/><br><br>
+                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
