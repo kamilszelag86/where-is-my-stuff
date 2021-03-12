@@ -8,19 +8,27 @@
 </head>
 <body>
 <h2><spring:message code="home.message"/></h2><br>
-<div>
-    <sec:authorize access="!isAuthenticated()">
-        <a href="<c:url value="/login"/>" class="btn">Zaloguj</a>
-    </sec:authorize>
-</div>
-<br><br>
-<div>
-    <sec:authorize access="isAuthenticated()">
-        <form action="<c:url value="/logout"/>" method="post">
-            <input class="fa fa-id-badge" type="submit" value="<spring:message  code="logout.button"/>">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </sec:authorize>
-</div>
-</body>
-</html>
+<h3>Aby skorzystać z aplikacji musisz się zalogować.</h3><br>
+
+<a href="<c:url value="/login"/>" class="btn">Zaloguj</a><br><br>
+
+<h3>Nie masz konta? Zarejestruj się?</h3><br>
+<a href="<c:url value="/register"/>" class="btn">Załóż konto</a>
+
+
+<%--<div>--%>
+<%--    <sec:authorize access="!isAuthenticated()">--%>
+<%--        <a href="<c:url value="/login"/>" class="btn">Zaloguj</a>--%>
+<%--    </sec:authorize>--%>
+<%--</div>--%>
+<%--<br><br>--%>
+<%--<div>--%>
+<%--    <sec:authorize access="isAuthenticated()">--%>
+<%--        <form action="<c:url value="/logout"/>" method="post">--%>
+<%--            <input class="fa fa-id-badge" type="submit" value="<spring:message  code="logout.button"/>">--%>
+<%--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+<%--        </form>--%>
+<%--    </sec:authorize>--%>
+<%--</div>--%>
+<%--</body>--%>
+<%--</html>--%>

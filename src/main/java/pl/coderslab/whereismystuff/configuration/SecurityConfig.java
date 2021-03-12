@@ -13,14 +13,6 @@ import pl.coderslab.whereismystuff.security.SpringDataUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password("{noop}user123").roles("USER")
-//                .and()
-//                .withUser("admin1").password("{noop}admin123").roles("ADMIN");
-//    }
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -35,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/app/**").authenticated()
                 .antMatchers("/css/**", "/img/**", "/js/**", "/scss/**", "/vendor/**").permitAll()
                 .and().formLogin().loginPage("/login")
+                .defaultSuccessUrl("/app")
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");

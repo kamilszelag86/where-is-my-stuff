@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,11 @@
 <jsp:include page="../fragments/head.jsp"/>
 
 <body class="bg-gradient-primary">
+<div>
+<sec:authorize access="isAuthenticated()">
+    <% response.sendRedirect("app"); %>
+</sec:authorize>
+</div>
 
 <div class="container">
 
@@ -66,18 +72,3 @@
 </body>
 </html>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Title</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-
-<%--<form method="post">--%>
-<%--    <div><label> User Name : <input type="text" name="username"/> </label></div>--%>
-<%--    <div><label> Password: <input type="password" name="password"/> </label></div>--%>
-<%--    <div><input type="submit" value="<spring:message code="login.button"/>"/></div>--%>
-<%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-<%--</form>--%>
-
-<%--</body>--%>
-<%--</html>--%>
