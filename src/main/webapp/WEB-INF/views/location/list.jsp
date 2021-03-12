@@ -32,12 +32,14 @@
                     <tr>
                         <th>Nazwa</th>
                         <th>Opis</th>
+                        <th>Akcje</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Nazwa</th>
                         <th>Opis</th>
+                        <th>Akcje</th>
                     </tr>
                     </tfoot>
                     <tbody>

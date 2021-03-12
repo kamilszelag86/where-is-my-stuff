@@ -33,6 +33,7 @@
                         <th>Nazwa</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
+                        <th>Akcje</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -40,6 +41,7 @@
                         <th>Nazwa</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
+                        <th>Akcje</th>
                     </tr>
                     </tfoot>
                     <tbody>
