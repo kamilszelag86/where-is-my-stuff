@@ -23,6 +23,7 @@
                 <form:form method="post" action="./" modelAttribute="item" enctype="multipart/form-data">
                     <form:hidden path="user.id" value="${currentUser.user.id}"/>
                     <form:hidden path="id"/>
+                    <form:hidden path="itemImage"/>
                     Nazwa:<br>
                     <form:input path="name"/><br>
                     <form:errors path="name" cssClass="alert-danger"/><br>

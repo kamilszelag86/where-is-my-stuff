@@ -101,6 +101,9 @@ public class ItemController {
             return "item/edit-form";
         }
         if (!multipartFile.isEmpty()) {
+            if (!item.getItemImage().isEmpty()) {
+                FileUploadUtil.deleteFile(item.getItemImagePath());
+            }
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             item.setItemImage(fileName);
             Item updated = itemService.update(item);

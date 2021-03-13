@@ -28,4 +28,12 @@ public class FileUploadUtil {
         }
     }
 
+    public static void deleteFile(String filePath) throws IOException {
+        if (filePath.startsWith("/")) {
+            filePath = filePath.replaceFirst("/", "");
+        }
+        Path toDelete = Paths.get(filePath);
+        Files.delete(toDelete);
+    }
+
 }
