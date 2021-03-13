@@ -34,7 +34,7 @@ public class Item {
     @ManyToOne
     private Location location;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
 
     public String getItemImagePath() {
