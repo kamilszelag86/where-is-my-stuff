@@ -13,7 +13,7 @@ public interface ItemService {
 
     Item findById(long itemId);
 
-    void update(Item item);
+    Item update(Item item);
 
     void delete(long itemId);
 }

@@ -95,9 +95,18 @@ public class ItemController {
     }
 
     @PostMapping("/edit")
-    public String editItem(@Valid Item item, BindingResult result) {
+    public String editItem(@Valid Item item, BindingResult result,
+                           @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (result.hasErrors()) {
             return "item/edit-form";
+        }
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            item.setItemImage(fileName);
+            Item updated = itemService.update(item);
+            String uploadDir = "item-images/" + updated.getId();
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            return "redirect:/app/item/all";
         }
         itemService.update(item);
         return "redirect:/app/item/all";

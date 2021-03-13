@@ -31,6 +31,7 @@
                     <thead>
                     <tr>
                         <th>Nazwa</th>
+                        <th>Zdjęcie</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
                         <th>Akcje</th>
@@ -39,6 +40,7 @@
                     <tfoot>
                     <tr>
                         <th>Nazwa</th>
+                        <th>Zdjęcie</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
                         <th>Akcje</th>
@@ -48,6 +50,7 @@
                     <c:forEach var="item" items="${items}">
                         <tr>
                             <td>${item.name}</td>
+                            <td><img src="${item.itemImagePath}" height="70"/></td>
                             <td>${item.description}</td>
                             <td>${item.location.name}</td>
                             <td>

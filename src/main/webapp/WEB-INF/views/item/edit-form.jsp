@@ -20,7 +20,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form:form method="post" action="./" modelAttribute="item">
+                <form:form method="post" action="./" modelAttribute="item" enctype="multipart/form-data">
                     <form:hidden path="user.id" value="${currentUser.user.id}"/>
                     <form:hidden path="id"/>
                     Nazwa:<br>
@@ -34,7 +34,9 @@
                         <form:options items="${locations}" itemLabel="name" itemValue="id"/>
                     </form:select><br><br>
                     Kategorie:<br>
-                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br><br>
+                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br>
+                    Dodaj zdjęcie:<br>
+                    <input type="file" name="image" accept="image/*"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>

@@ -33,10 +33,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void update(Item item) {
+    public Item update(Item item) {
         if (itemRepository.existsById(item.getId())) {
-            itemRepository.save(item);
+            return itemRepository.save(item);
         }
+        return null;
     }
 
     @Override
