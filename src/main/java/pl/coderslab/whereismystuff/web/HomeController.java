@@ -20,7 +20,6 @@ import javax.validation.Valid;
 public class HomeController {
 
     private final UserService userService;
-    private final UserDtoConverter userDtoConverter;
 
     @GetMapping
     public String home() {
@@ -36,14 +35,13 @@ public class HomeController {
     @PostMapping("/register")
     public String doRegister(@ModelAttribute("user") @Valid UserDto user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            if (result.hasGlobalErrors()) {
-                result.getGlobalErrors().stream()
-                        .filter(e -> "ConfirmedPassword".equals(e.getCode()))
-                        .forEach(e -> model.addAttribute("confirmMessage", e.getDefaultMessage()));
-            }
+            result.getGlobalErrors().stream()
+                    .filter(e -> "ConfirmedPassword".equals(e.getCode()))
+                    .findFirst()
+                    .ifPresent(e -> model.addAttribute("confirmMessage", e.getDefaultMessage()));
             return "user/register";
         }
-        userService.createUser(userDtoConverter.toEntity(user));
+        userService.createUser(UserDtoConverter.toEntity(user));
         return "redirect:/login";
     }
 
