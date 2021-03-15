@@ -1,6 +1,8 @@
 package pl.coderslab.whereismystuff.user.service;
 
 import lombok.RequiredArgsConstructor;
+
+import org.apache.commons.collections4.SetUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.security.Role;
@@ -9,8 +11,6 @@ import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.HashSet;
 
 @Service
 @Transactional
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRoles(SetUtils.hashSet(userRole));
         userRepository.save(user);
     }
 }

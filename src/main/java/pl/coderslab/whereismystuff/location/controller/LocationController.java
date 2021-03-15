@@ -22,16 +22,14 @@ import javax.validation.Valid;
 public class LocationController {
 
     private final LocationService locationService;
-    private CurrentUser currentUser;
 
     @ModelAttribute
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
     @GetMapping("/all")
-    public String allCategories(Model model) {
+    public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("locations", locationService.findAllByUser(currentUser.getUser()));
         return "location/list";
     }
@@ -52,7 +50,8 @@ public class LocationController {
     }
 
     @GetMapping("/edit/{locationId}")
-    public String editForm(@PathVariable long locationId, Model model) {
+    public String editForm(@AuthenticationPrincipal CurrentUser currentUser,
+                           @PathVariable long locationId, Model model) {
         try {
             Location toEdit = locationService.findById(locationId);
             if (!currentUser.getUser().equals(toEdit.getUser())) {
@@ -75,7 +74,8 @@ public class LocationController {
     }
 
     @GetMapping("/delete/{locationId}")
-    public String deleteConfirm(@PathVariable long locationId, Model model) {
+    public String deleteConfirm(@AuthenticationPrincipal CurrentUser currentUser,
+                                @PathVariable long locationId, Model model) {
         try {
             Location toDelete = locationService.findById(locationId);
             if (!currentUser.getUser().equals(toDelete.getUser())) {

@@ -22,16 +22,14 @@ import javax.validation.Valid;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private CurrentUser currentUser;
 
     @ModelAttribute
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
     @GetMapping("all")
-    public String allCategories(Model model) {
+    public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("categories", categoryService.findAllByUser(currentUser.getUser()));
         return "category/list";
     }
@@ -52,7 +50,8 @@ public class CategoryController {
     }
 
     @GetMapping("/edit/{categoryId}")
-    public String editCategoryForm(@PathVariable long categoryId, Model model) {
+    public String editCategoryForm(@AuthenticationPrincipal CurrentUser currentUser,
+                                   @PathVariable long categoryId, Model model) {
         try {
             Category toEdit = categoryService.findById(categoryId);
             if (!currentUser.getUser().equals(toEdit.getUser())) {
@@ -75,7 +74,8 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{categoryId}")
-    public String deleteConfirm(@PathVariable long categoryId, Model model) {
+    public String deleteConfirm(@AuthenticationPrincipal CurrentUser currentUser,
+                                @PathVariable long categoryId, Model model) {
         try {
             Category toDelete = categoryService.findById(categoryId);
             if (!currentUser.getUser().equals(toDelete.getUser())) {
