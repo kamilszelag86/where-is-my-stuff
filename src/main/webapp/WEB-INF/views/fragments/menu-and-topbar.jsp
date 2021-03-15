@@ -63,6 +63,10 @@
                 <i class="fa fa-bars"></i>
             </button>
 
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Twój zespół: ${currentUser.user.team.name}</h6>
+            </div>
+
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
 

@@ -2,6 +2,7 @@ package pl.coderslab.whereismystuff.user.entity;
 
 import lombok.Data;
 import pl.coderslab.whereismystuff.security.Role;
+import pl.coderslab.whereismystuff.team.entity.Team;
 
 import javax.persistence.*;
 import java.util.Set;

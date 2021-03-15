@@ -2,15 +2,20 @@ package pl.coderslab.whereismystuff.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.team.entity.Team;
+import pl.coderslab.whereismystuff.team.service.TeamService;
 import pl.coderslab.whereismystuff.user.dto.UserDto;
 import pl.coderslab.whereismystuff.user.dto.UserDtoConverter;
+import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.validation.Valid;
@@ -20,6 +25,7 @@ import javax.validation.Valid;
 public class HomeController {
 
     private final UserService userService;
+    private final TeamService teamService;
 
     @GetMapping
     public String home() {
@@ -48,7 +54,34 @@ public class HomeController {
     @GetMapping("/app")
     public String dashboard(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("currentUser", currentUser);
-        return "dashboard";
+        if (currentUser.getUser().getTeam() != null) {
+            return "dashboard";
+        } else {
+            model.addAttribute("newTeam", new Team());
+            model.addAttribute("teams", teamService.findAll());
+            return "user/select-team";
+        }
+    }
+
+    @PostMapping("app/team/create")
+    public String createTeam(@ModelAttribute("newTeam") @Valid Team team, BindingResult result,
+                             @AuthenticationPrincipal CurrentUser currentUser) {
+        if (result.hasErrors()) {
+            return "user/select-team";
+        }
+        User user = currentUser.getUser();
+        Team created = teamService.create(team);
+        user.setTeam(created);
+        userService.updateUser(user);
+        return "redirect:/app";
+    }
+
+    @PostMapping("app/team/add")
+    public String joinTeam(@RequestParam Team team, @AuthenticationPrincipal CurrentUser currentUser) {
+        User user = currentUser.getUser();
+        user.setTeam(team);
+        userService.updateUser(user);
+        return "redirect:/app";
     }
 
 }

@@ -34,4 +34,12 @@ public class UserServiceImpl implements UserService {
         user.setRoles(SetUtils.hashSet(userRole));
         userRepository.save(user);
     }
+
+    @Override
+    public void updateUser(User user) {
+        if (userRepository.existsById(user.getId())) {
+            userRepository.save(user);
+        }
+    }
+
 }
