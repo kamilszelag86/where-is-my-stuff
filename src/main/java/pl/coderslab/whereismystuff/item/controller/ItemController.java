@@ -37,17 +37,17 @@ public class ItemController {
 
     @ModelAttribute(name = "categories")
     public List<Category> categories(@AuthenticationPrincipal CurrentUser currentUser) {
-        return categoryService.findAllByUser(currentUser.getUser());
+        return categoryService.findAllByTeam(currentUser.getUser().getTeam());
     }
 
     @ModelAttribute(name = "locations")
     public List<Location> locations(@AuthenticationPrincipal CurrentUser currentUser) {
-        return locationService.findAllByUser(currentUser.getUser());
+        return locationService.findAllByTeam(currentUser.getUser().getTeam());
     }
 
     @GetMapping("/all")
     public String allItems(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("items", itemService.findAllByUser(currentUser.getUser()));
+        model.addAttribute("items", itemService.findAllByTeam(currentUser.getUser().getTeam()));
         return "item/list";
     }
 
@@ -71,7 +71,7 @@ public class ItemController {
                            @AuthenticationPrincipal CurrentUser currentUser) {
         try {
             Item toEdit = itemService.findById(itemId);
-            if (!currentUser.getUser().equals(toEdit.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toEdit.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("item", toEdit);
@@ -95,7 +95,7 @@ public class ItemController {
                                 @AuthenticationPrincipal CurrentUser currentUser) {
         try {
             Item toDelete = itemService.findById(itemId);
-            if (!currentUser.getUser().equals(toDelete.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toDelete.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("itemId", itemId);

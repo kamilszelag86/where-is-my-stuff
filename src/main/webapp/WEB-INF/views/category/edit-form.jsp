@@ -22,6 +22,7 @@
             <div class="table-responsive">
                 <form:form method="post" action="./" modelAttribute="category">
                     <form:hidden path="user.id" value="${currentUser.user.id}"/>
+                    <form:hidden path="team.id" value="${currentUser.user.team.id}"/>
                     <form:hidden path="id"/>
                     Nazwa:<br>
                     <form:input path="name"/><br>

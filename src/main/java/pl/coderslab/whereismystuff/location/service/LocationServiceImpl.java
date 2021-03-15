@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.repository.LocationRepository;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +21,11 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<Location> findAllByUser(User user) {
         return locationRepository.findAllByUser(user);
+    }
+
+    @Override
+    public List<Location> findAllByTeam(Team team) {
+        return locationRepository.findAllByTeam(team);
     }
 
     @Override

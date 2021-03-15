@@ -1,8 +1,10 @@
 package pl.coderslab.whereismystuff.item.entity;
 
 import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.location.entity.Location;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.persistence.*;
@@ -31,10 +33,13 @@ public class Item {
     private User user;
 
     @ManyToOne
+    @NotNull
+    private Team team;
+
+    @ManyToOne
     private Location location;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
-
 
 }

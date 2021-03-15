@@ -1,7 +1,6 @@
 package pl.coderslab.whereismystuff.user.service;
 
 import lombok.RequiredArgsConstructor;
-
 import org.apache.commons.collections4.SetUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

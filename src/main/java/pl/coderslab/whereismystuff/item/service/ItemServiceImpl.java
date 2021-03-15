@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,8 +19,8 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
 
     @Override
-    public List<Item> findAllByUser(User user) {
-        return itemRepository.findAllByUser(user);
+    public List<Item> findAllByTeam(Team team) {
+        return itemRepository.findAllByTeam(team);
     }
 
     @Override

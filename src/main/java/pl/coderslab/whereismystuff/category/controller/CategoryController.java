@@ -28,9 +28,9 @@ public class CategoryController {
         return currentUser;
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("categories", categoryService.findAllByUser(currentUser.getUser()));
+        model.addAttribute("categories", categoryService.findAllByTeam(currentUser.getUser().getTeam()));
         return "category/list";
     }
 
@@ -54,7 +54,7 @@ public class CategoryController {
                                    @PathVariable long categoryId, Model model) {
         try {
             Category toEdit = categoryService.findById(categoryId);
-            if (!currentUser.getUser().equals(toEdit.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toEdit.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("category", toEdit);
@@ -78,7 +78,7 @@ public class CategoryController {
                                 @PathVariable long categoryId, Model model) {
         try {
             Category toDelete = categoryService.findById(categoryId);
-            if (!currentUser.getUser().equals(toDelete.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toDelete.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("categoryId", categoryId);

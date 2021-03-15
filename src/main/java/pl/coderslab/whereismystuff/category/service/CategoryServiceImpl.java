@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.repository.CategoryRepository;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +21,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAllByUser(User user) {
         return categoryRepository.findAllByUser(user);
+    }
+
+    @Override
+    public List<Category> findAllByTeam(Team team) {
+        return categoryRepository.findAllByTeam(team);
     }
 
     @Override

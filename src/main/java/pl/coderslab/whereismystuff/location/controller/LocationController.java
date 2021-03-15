@@ -30,7 +30,7 @@ public class LocationController {
 
     @GetMapping("/all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("locations", locationService.findAllByUser(currentUser.getUser()));
+        model.addAttribute("locations", locationService.findAllByTeam(currentUser.getUser().getTeam()));
         return "location/list";
     }
 
@@ -54,7 +54,7 @@ public class LocationController {
                            @PathVariable long locationId, Model model) {
         try {
             Location toEdit = locationService.findById(locationId);
-            if (!currentUser.getUser().equals(toEdit.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toEdit.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("location", toEdit);
@@ -78,7 +78,7 @@ public class LocationController {
                                 @PathVariable long locationId, Model model) {
         try {
             Location toDelete = locationService.findById(locationId);
-            if (!currentUser.getUser().equals(toDelete.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(toDelete.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("locationId", locationId);

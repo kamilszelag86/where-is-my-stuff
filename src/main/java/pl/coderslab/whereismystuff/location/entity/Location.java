@@ -1,6 +1,7 @@
 package pl.coderslab.whereismystuff.location.entity;
 
 import lombok.Data;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 
 import javax.persistence.*;
@@ -26,5 +27,9 @@ public class Location {
     @ManyToOne
     @NotNull
     private User user;
+
+    @ManyToOne
+    @NotNull
+    private Team team;
 
 }

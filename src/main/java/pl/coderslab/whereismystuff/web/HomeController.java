@@ -2,7 +2,6 @@ package pl.coderslab.whereismystuff.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,19 +68,21 @@ public class HomeController {
         if (result.hasErrors()) {
             return "user/select-team";
         }
-        User user = currentUser.getUser();
         Team created = teamService.create(team);
-        user.setTeam(created);
-        userService.updateUser(user);
+        setTeamForUser(created, currentUser);
         return "redirect:/app";
     }
 
     @PostMapping("app/team/add")
     public String joinTeam(@RequestParam Team team, @AuthenticationPrincipal CurrentUser currentUser) {
+        setTeamForUser(team, currentUser);
+        return "redirect:/app";
+    }
+
+    private void setTeamForUser(Team team, CurrentUser currentUser) {
         User user = currentUser.getUser();
         user.setTeam(team);
         userService.updateUser(user);
-        return "redirect:/app";
     }
 
 }
