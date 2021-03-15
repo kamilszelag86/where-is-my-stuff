@@ -136,5 +136,20 @@ public class ItemController {
         return "redirect:/app/item/all";
     }
 
+    @GetMapping("show/{itemId}")
+    public String showItem(@PathVariable long itemId, Model model,
+                           @AuthenticationPrincipal CurrentUser currentUser) {
+        try {
+            Item item = itemService.findById(itemId);
+            if (!currentUser.getUser().equals(item.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("item", item);
+            return "item/show";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
 
