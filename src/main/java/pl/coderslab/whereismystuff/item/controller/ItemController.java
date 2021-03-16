@@ -30,11 +30,6 @@ public class ItemController {
     private final CategoryService categoryService;
     private final LocationService locationService;
 
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
-
     @ModelAttribute(name = "categories")
     public List<Category> categories(@AuthenticationPrincipal CurrentUser currentUser) {
         return categoryService.findAllByUser(currentUser.getUser());

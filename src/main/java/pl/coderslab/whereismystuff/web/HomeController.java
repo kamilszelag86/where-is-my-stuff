@@ -48,8 +48,7 @@ public class HomeController {
     }
 
     @GetMapping("/app")
-    public String dashboard(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("currentUser", currentUser);
+    public String dashboard(Model model) {
         return "dashboard";
     }
 

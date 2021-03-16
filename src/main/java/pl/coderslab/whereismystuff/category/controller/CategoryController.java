@@ -23,11 +23,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
-
     @GetMapping("all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("categories", categoryService.findAllByUser(currentUser.getUser()));

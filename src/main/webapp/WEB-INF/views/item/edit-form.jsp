@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
+<sec:authentication property="principal.user" var="user"/>
 <jsp:include page="../fragments/head.jsp"/>
 
 <body id="page-top">
@@ -21,7 +23,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <form:form method="post" action="./" modelAttribute="item">
-                    <form:hidden path="user.id" value="${currentUser.user.id}"/>
+                    <form:hidden path="user.id" value="${user.id}"/>
                     <form:hidden path="id"/>
                     Nazwa:<br>
                     <form:input path="name"/><br>
@@ -34,7 +36,8 @@
                         <form:options items="${locations}" itemLabel="name" itemValue="id"/>
                     </form:select><br><br>
                     Kategorie:<br>
-                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br><br>
+                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id"
+                                     delimiter="<br>"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
