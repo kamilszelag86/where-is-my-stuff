@@ -17,7 +17,7 @@ import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.service.ItemService;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
-import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 
 import javax.persistence.EntityNotFoundException;
@@ -33,11 +33,6 @@ public class ItemController {
     private final ItemService itemService;
     private final CategoryService categoryService;
     private final LocationService locationService;
-
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
 
     @ModelAttribute(name = "categories")
     public List<Category> categories(@AuthenticationPrincipal CurrentUser currentUser) {

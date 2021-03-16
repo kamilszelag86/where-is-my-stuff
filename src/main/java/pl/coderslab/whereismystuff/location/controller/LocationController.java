@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
-import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -22,11 +22,6 @@ import javax.validation.Valid;
 public class LocationController {
 
     private final LocationService locationService;
-
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
 
     @GetMapping("/all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
