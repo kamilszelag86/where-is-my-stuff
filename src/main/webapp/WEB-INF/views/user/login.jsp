@@ -10,9 +10,9 @@
 
 <body class="bg-gradient-primary">
 <div>
-<sec:authorize access="isAuthenticated()">
-    <% response.sendRedirect("app"); %>
-</sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+        <% response.sendRedirect("app"); %>
+    </sec:authorize>
 </div>
 
 <div class="container">
@@ -44,11 +44,8 @@
                                                id="exampleInputPassword"
                                                placeholder="<spring:message code="form.password"/>">
                                     </div>
-<%--                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-
                                     <input type="submit" value="<spring:message code="login.button"/>"
                                            class="btn btn-primary btn-user btn-block"/>
-
                                 </form:form>
                                 <hr>
                                 <div class="text-center">

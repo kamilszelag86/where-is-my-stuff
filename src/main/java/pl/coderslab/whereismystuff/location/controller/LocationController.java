@@ -23,11 +23,6 @@ public class LocationController {
 
     private final LocationService locationService;
 
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
-
     @GetMapping("/all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("locations", locationService.findAllByUser(currentUser.getUser()));
