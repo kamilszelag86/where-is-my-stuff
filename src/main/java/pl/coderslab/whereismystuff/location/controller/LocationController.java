@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
-import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;

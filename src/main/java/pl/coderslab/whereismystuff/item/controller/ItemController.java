@@ -15,7 +15,7 @@ import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.service.ItemService;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
-import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
