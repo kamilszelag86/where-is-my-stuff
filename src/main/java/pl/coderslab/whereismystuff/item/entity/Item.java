@@ -26,6 +26,7 @@ public class Item {
 
     private String description;
     private String itemImage;
+    private String receiptImage;
 
     @ManyToOne
     @NotNull
@@ -42,6 +43,13 @@ public class Item {
             return null;
         }
         return "/item-images/" + id + "/" + itemImage;
+    }
+
+    public String getReceiptImagePath() {
+        if (receiptImage == null || id == null) {
+            return null;
+        }
+        return "/item-images/" + id + "/" + receiptImage;
     }
 
 }

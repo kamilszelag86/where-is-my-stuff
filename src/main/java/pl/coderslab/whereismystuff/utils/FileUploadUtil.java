@@ -29,11 +29,15 @@ public class FileUploadUtil {
     }
 
     public static void deleteFile(String filePath) throws IOException {
-        if (filePath.startsWith("/")) {
-            filePath = filePath.replaceFirst("/", "");
+        try {
+            if (filePath.startsWith("/")) {
+                filePath = filePath.replaceFirst("/", "");
+            }
+            Path toDelete = Paths.get(filePath);
+            Files.delete(toDelete);
+        } catch (IOException e) {
+            throw new IOException("Could not delete image file: " + filePath, e);
         }
-        Path toDelete = Paths.get(filePath);
-        Files.delete(toDelete);
     }
 
 }
