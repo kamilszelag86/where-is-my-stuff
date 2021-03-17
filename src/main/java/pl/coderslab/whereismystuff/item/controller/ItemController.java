@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.service.CategoryService;
 import pl.coderslab.whereismystuff.item.entity.Item;
@@ -23,7 +23,6 @@ import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -59,13 +58,17 @@ public class ItemController {
 
     @PostMapping("/add")
     public String add(@Valid Item item, BindingResult result,
-                      @RequestParam("image") MultipartFile image) throws IOException {
+                      @RequestParam("image") MultipartFile image,
+                      @RequestParam("receipt") MultipartFile receipt) throws IOException {
         if (result.hasErrors()) {
             return "item/add-form";
         }
         Item created = itemService.create(item);
         if (!image.isEmpty()) {
             saveItemImage(image, created);
+        }
+        if (!receipt.isEmpty()) {
+            saveReceiptImage(receipt, created);
         }
         return "redirect:/app/item/all";
     }
@@ -87,7 +90,8 @@ public class ItemController {
 
     @PostMapping("/edit")
     public String editItem(@Valid Item item, BindingResult result,
-                           @RequestParam("image") MultipartFile image) throws IOException {
+                           @RequestParam("image") MultipartFile image,
+                           @RequestParam("receipt") MultipartFile receipt) throws IOException {
         if (result.hasErrors()) {
             return "item/edit-form";
         }
@@ -97,6 +101,12 @@ public class ItemController {
                 FileUploadUtil.deleteFile(item.getItemImagePath());
             }
             saveItemImage(image, updated);
+        }
+        if (!receipt.isEmpty()) {
+            if (!item.getReceiptImage().isEmpty()) {
+                FileUploadUtil.deleteFile(item.getReceiptImagePath());
+            }
+            saveReceiptImage(receipt, updated);
         }
         return "redirect:/app/item/all";
     }
@@ -121,6 +131,9 @@ public class ItemController {
         if (item.getItemImage() != null) {
             FileUploadUtil.deleteFile(item.getItemImagePath());
         }
+        if (item.getReceiptImage() != null) {
+            FileUploadUtil.deleteFile(item.getReceiptImagePath());
+        }
         itemService.delete(item.getId());
         return "redirect:/app/item/all";
     }
@@ -140,12 +153,20 @@ public class ItemController {
         }
     }
 
-    // saving image file for existing item
+    // saving image file for itemImage
     private void saveItemImage(MultipartFile multipartFile, Item item) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = "item-images/" + item.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         itemService.setItemImage(item, fileName);
+    }
+
+    // saving image file for receiptImage
+    private void saveReceiptImage(MultipartFile multipartFile, Item item) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "item-images/" + item.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        itemService.setReceiptImage(item, fileName);
     }
 
 }

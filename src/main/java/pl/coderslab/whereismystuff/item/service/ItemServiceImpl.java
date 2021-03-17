@@ -53,4 +53,9 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.setItemImage(item, fileName);
     }
 
+    @Override
+    public void setReceiptImage(Item item, String fileName) {
+        itemRepository.setReceiptImage(item, fileName);
+    }
+
 }

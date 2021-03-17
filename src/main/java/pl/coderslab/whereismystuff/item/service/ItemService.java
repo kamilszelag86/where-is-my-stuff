@@ -19,4 +19,6 @@ public interface ItemService {
 
     void setItemImage(Item item, String fileName);
 
+    void setReceiptImage(Item item, String fileName);
+
 }
