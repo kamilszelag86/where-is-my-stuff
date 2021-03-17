@@ -45,7 +45,9 @@
                     <tbody>
                     <c:forEach var="location" items="${locations}">
                         <tr>
-                            <td>${location.name}</td>
+                            <td>
+                                <a href="<c:url value="/app/location/show/${location.id}"/>">${location.name}</a>
+                            </td>
                             <td>${location.description}</td>
                             <td>
                                 <a href="<c:url value="/app/location/edit/${location.id}"/>"

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
+import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 
@@ -21,6 +22,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> findAllByUser(User user) {
         return itemRepository.findAllByUser(user);
+    }
+
+    @Override
+    public List<Item> findAllByLocation(Location location) {
+        return itemRepository.findAllByLocation(location);
     }
 
     @Override
