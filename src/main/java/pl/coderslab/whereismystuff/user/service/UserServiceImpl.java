@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.SetUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.whereismystuff.security.Role;
 import pl.coderslab.whereismystuff.security.RoleRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.repository.UserRepository;
@@ -29,10 +28,10 @@ public class UserServiceImpl implements UserService {
     public void createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(SetUtils.hashSet(userRole));
+        user.setRoles(SetUtils.hashSet(roleRepository.getRoleUser()));
         userRepository.save(user);
     }
+
 
     @Override
     public void updateUser(User user) {

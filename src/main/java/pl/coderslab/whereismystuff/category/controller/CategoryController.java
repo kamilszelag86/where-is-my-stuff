@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.service.CategoryService;
-import pl.coderslab.whereismystuff.security.CurrentUser;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -23,12 +23,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @ModelAttribute
-    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
-    }
-
-    @GetMapping("/all")
+    @GetMapping("all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("categories", categoryService.findAllByTeam(currentUser.getUser().getTeam()));
         return "category/list";

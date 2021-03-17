@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.service.UserService;
 

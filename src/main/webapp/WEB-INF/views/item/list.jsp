@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <jsp:include page="../fragments/head.jsp"/>
@@ -31,6 +31,7 @@
                     <thead>
                     <tr>
                         <th>Nazwa</th>
+                        <th>Zdjęcie</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
                         <th>Akcje</th>
@@ -39,6 +40,7 @@
                     <tfoot>
                     <tr>
                         <th>Nazwa</th>
+                        <th>Zdjęcie</th>
                         <th>Opis</th>
                         <th>Lokalizacja</th>
                         <th>Akcje</th>
@@ -47,9 +49,12 @@
                     <tbody>
                     <c:forEach var="item" items="${items}">
                         <tr>
-                            <td>${item.name}</td>
+                            <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
+                            <td><img src="${item.itemImagePath}" height="70"/></td>
                             <td>${item.description}</td>
-                            <td>${item.location.name}</td>
+                            <td>
+                                <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
+                            </td>
                             <td>
                                 <a href="<c:url value="/app/item/edit/${item.id}"/>"
                                    class="btn btn-secondary btn-icon-split">

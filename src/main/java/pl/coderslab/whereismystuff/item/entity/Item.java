@@ -1,7 +1,6 @@
 package pl.coderslab.whereismystuff.item.entity;
 
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.team.entity.Team;
@@ -27,6 +26,8 @@ public class Item {
     private String name;
 
     private String description;
+    private String itemImage;
+    private String receiptImage;
 
     @ManyToOne
     @NotNull
@@ -41,5 +42,19 @@ public class Item {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
+
+    public String getItemImagePath() {
+        if (itemImage == null || id == null) {
+            return null;
+        }
+        return "/item-images/" + id + "/" + itemImage;
+    }
+
+    public String getReceiptImagePath() {
+        if (receiptImage == null || id == null) {
+            return null;
+        }
+        return "/item-images/" + id + "/" + receiptImage;
+    }
 
 }

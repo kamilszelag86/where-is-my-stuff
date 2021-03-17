@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <jsp:include page="../fragments/head.jsp"/>
@@ -26,7 +26,7 @@
                     <span class="text">NIE</span>
                 </a><br><br>
                 <form:form method="post" action="./">
-                    <input type="hidden" name="itemId" value="${itemId}">
+                    <input type="hidden" name="item" value="${itemId}">
                     <button type="submit" class="btn btn-danger btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>

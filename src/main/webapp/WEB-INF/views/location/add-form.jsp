@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
+<sec:authentication property="principal.user" var="user"/>
 <jsp:include page="../fragments/head.jsp"/>
 
 <body id="page-top">
@@ -21,8 +23,8 @@
         <div class="card-body">
             <div class="table-responsive">
                 <form:form method="post" modelAttribute="location">
-                    <form:hidden path="user.id" value="${currentUser.user.id}"/>
-                    <form:hidden path="team.id" value="${currentUser.user.team.id}"/>
+                    <form:hidden path="user.id" value="${user.id}"/>
+                    <form:hidden path="team.id" value="${user.team.id}"/>
                     Nazwa:<br>
                     <form:input path="name"/><br>
                     <form:errors path="name" cssClass="alert-danger"/><br>

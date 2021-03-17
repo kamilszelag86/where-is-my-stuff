@@ -1,4 +1,4 @@
-package pl.coderslab.whereismystuff.security;
+package pl.coderslab.whereismystuff.security.entity;
 
 import lombok.Data;
 

@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <jsp:include page="../fragments/head.jsp"/>
@@ -45,7 +45,9 @@
                     <tbody>
                     <c:forEach var="location" items="${locations}">
                         <tr>
-                            <td>${location.name}</td>
+                            <td>
+                                <a href="<c:url value="/app/location/show/${location.id}"/>">${location.name}</a>
+                            </td>
                             <td>${location.description}</td>
                             <td>
                                 <a href="<c:url value="/app/location/edit/${location.id}"/>"
