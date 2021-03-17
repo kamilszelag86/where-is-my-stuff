@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import pl.coderslab.whereismystuff.item.service.ItemService;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 public class LocationController {
 
     private final LocationService locationService;
+    private final ItemService itemService;
 
     @GetMapping("/all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -42,6 +44,22 @@ public class LocationController {
         }
         locationService.create(location);
         return "redirect:/app/location/all";
+    }
+
+    @GetMapping("/show/{locationId}")
+    public String showLocation(@AuthenticationPrincipal CurrentUser currentUser,
+                               @PathVariable long locationId, Model model) {
+        try {
+            Location location = locationService.findById(locationId);
+            if (!currentUser.getUser().equals(location.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("location", location);
+            model.addAttribute("items", itemService.findAllByLocation(location));
+            return "location/show";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/edit/{locationId}")

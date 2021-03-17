@@ -49,7 +49,9 @@
                         <tr>
                             <td>${item.name}</td>
                             <td>${item.description}</td>
-                            <td>${item.location.name}</td>
+                            <td>
+                                <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
+                            </td>
                             <td>
                                 <a href="<c:url value="/app/item/edit/${item.id}"/>"
                                    class="btn btn-secondary btn-icon-split">
