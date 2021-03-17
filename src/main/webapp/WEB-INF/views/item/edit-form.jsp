@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form:form method="post" action="./" modelAttribute="item">
+                <form:form method="post" action="./" modelAttribute="item" enctype="multipart/form-data">
                     <form:hidden path="user.id" value="${user.id}"/>
                     <form:hidden path="id"/>
                     <form:hidden path="itemImage"/>
@@ -39,7 +39,6 @@
                     Kategorie:<br>
                     <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id"
                                      delimiter="<br>"/><br><br>
-                    <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id" delimiter="<br>"/><br>
                     Dodaj zdjęcie:<br>
                     <input type="file" name="image" accept="image/*"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">

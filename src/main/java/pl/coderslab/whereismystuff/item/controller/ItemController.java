@@ -23,6 +23,7 @@ import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -58,19 +59,14 @@ public class ItemController {
 
     @PostMapping("/add")
     public String add(@Valid Item item, BindingResult result,
-                      @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                      @RequestParam("image") MultipartFile image) throws IOException {
         if (result.hasErrors()) {
             return "item/add-form";
         }
-        if (!multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            item.setItemImage(fileName);
-            Item created = itemService.create(item);
-            String uploadDir = "item-images/" + created.getId();
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-            return "redirect:/app/item/all";
+        Item created = itemService.create(item);
+        if (!image.isEmpty()) {
+            saveItemImage(image, created);
         }
-        itemService.create(item);
         return "redirect:/app/item/all";
     }
 
@@ -91,22 +87,17 @@ public class ItemController {
 
     @PostMapping("/edit")
     public String editItem(@Valid Item item, BindingResult result,
-                           @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                           @RequestParam("image") MultipartFile image) throws IOException {
         if (result.hasErrors()) {
             return "item/edit-form";
         }
-        if (!multipartFile.isEmpty()) {
+        Item updated = itemService.update(item);
+        if (!image.isEmpty()) {
             if (!item.getItemImage().isEmpty()) {
                 FileUploadUtil.deleteFile(item.getItemImagePath());
             }
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            item.setItemImage(fileName);
-            Item updated = itemService.update(item);
-            String uploadDir = "item-images/" + updated.getId();
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-            return "redirect:/app/item/all";
+            saveItemImage(image, updated);
         }
-        itemService.update(item);
         return "redirect:/app/item/all";
     }
 
@@ -126,8 +117,11 @@ public class ItemController {
     }
 
     @PostMapping("/delete")
-    public String deleteItem(@RequestParam long itemId) {
-        itemService.delete(itemId);
+    public String deleteItem(@RequestParam Item item) throws IOException {
+        if (item.getItemImage() != null) {
+            FileUploadUtil.deleteFile(item.getItemImagePath());
+        }
+        itemService.delete(item.getId());
         return "redirect:/app/item/all";
     }
 
@@ -144,6 +138,14 @@ public class ItemController {
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    // saving image file for existing item
+    private void saveItemImage(MultipartFile multipartFile, Item item) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "item-images/" + item.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        itemService.setItemImage(item, fileName);
     }
 
 }

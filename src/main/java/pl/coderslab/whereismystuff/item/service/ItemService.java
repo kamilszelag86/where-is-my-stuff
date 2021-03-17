@@ -16,4 +16,7 @@ public interface ItemService {
     Item update(Item item);
 
     void delete(long itemId);
+
+    void setItemImage(Item item, String fileName);
+
 }

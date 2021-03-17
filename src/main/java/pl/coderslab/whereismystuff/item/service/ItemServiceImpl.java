@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
+import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -45,6 +46,11 @@ public class ItemServiceImpl implements ItemService {
         if (itemRepository.existsById(itemId)) {
             itemRepository.deleteById(itemId);
         }
+    }
+
+    @Override
+    public void setItemImage(Item item, String fileName) {
+        itemRepository.setItemImage(item, fileName);
     }
 
 }
