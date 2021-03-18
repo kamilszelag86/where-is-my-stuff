@@ -19,7 +19,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Location> findAllByUser(User user) {
-        return locationRepository.findAllByUser(user);
+        return locationRepository.findAllByUserOrderByNameAsc(user);
     }
 
     @Override

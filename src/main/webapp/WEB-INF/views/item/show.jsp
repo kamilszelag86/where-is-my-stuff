@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <jsp:include page="../fragments/head.jsp"/>
@@ -36,13 +36,13 @@
                         </tr>
                         <tr>
                             <th>Lokalizacja</th>
-                            <td>${item.location.name}</td>
+                            <td><a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a></td>
                         </tr>
                         <tr>
                             <th>Kategorie</th>
                             <td>
                                 <c:forEach var="category" items="${item.categories}">
-                                    <p>${category.name}</p>
+                            <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
                                 </c:forEach>
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="${item.itemImagePath}"
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 30rem;" src="${item.itemImagePath}"
                          alt="">
                 </div>
             </div>

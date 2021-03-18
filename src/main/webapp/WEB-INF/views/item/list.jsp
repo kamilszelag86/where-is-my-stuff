@@ -20,61 +20,71 @@
                     </span>
         <span class="text">Dodaj przedmiot</span>
     </a><br><br>
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lista posiadanych przedmiotów</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Zdjęcie</th>
-                        <th>Opis</th>
-                        <th>Lokalizacja</th>
-                        <th>Akcje</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Zdjęcie</th>
-                        <th>Opis</th>
-                        <th>Lokalizacja</th>
-                        <th>Akcje</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <c:forEach var="item" items="${items}">
+
+    <div class="row">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Lista posiadanych przedmiotów</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                         <tr>
-                            <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
-                            <td><img src="${item.itemImagePath}" height="70"/></td>
-                            <td>${item.description}</td>
-                            <td>
-                                <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
-                            </td>
-                            <td>
-                                <a href="<c:url value="/app/item/edit/${item.id}"/>"
-                                   class="btn btn-secondary btn-icon-split">
+                            <th>Nazwa</th>
+                            <th>Zdjęcie</th>
+                            <th>Opis</th>
+                            <th>Lokalizacja</th>
+                            <th>Kategorie</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Zdjęcie</th>
+                            <th>Opis</th>
+                            <th>Lokalizacja</th>
+                            <th>Kategorie</th>
+                            <th>Akcje</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <c:forEach var="item" items="${items}">
+                            <tr>
+                                <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
+                                <td><img src="${item.itemImagePath}" height="70"/></td>
+                                <td>${item.description}</td>
+                                <td>
+                                    <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
+                                </td>
+                                <td>
+                                    <c:forEach var="category" items="${item.categories}">
+                                        <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <a href="<c:url value="/app/item/edit/${item.id}"/>"
+                                       class="btn btn-secondary btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                    <span class="text">Edytuj</span>
-                                </a>
-                                <a href="<c:url value="/app/item/delete/${item.id}"/>"
-                                   class="btn btn-danger btn-icon-split">
+                                        <span class="text">Edytuj</span>
+                                    </a>
+                                    <a href="<c:url value="/app/item/delete/${item.id}"/>"
+                                       class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                    <span class="text">Usuń</span>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                                        <span class="text">Usuń</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

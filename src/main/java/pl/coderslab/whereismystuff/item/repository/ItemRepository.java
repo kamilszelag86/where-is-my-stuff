@@ -3,6 +3,7 @@ package pl.coderslab.whereismystuff.item.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.user.entity.User;
@@ -15,6 +16,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     List<Item> findAllByLocation(Location location);
 
+    List<Item> findAllByCategories(Category category);
 
     @Modifying
     @Query("update Item i set i.itemImage = :fileName where i = :item")

@@ -16,7 +16,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Szczegóły lokalizacji</h1>
+        <h1 class="h3 mb-0 text-gray-800">Szczegóły kategorii</h1>
     </div>
 
     <!-- Content Row -->
@@ -28,11 +28,11 @@
                     <table class="table table-bordered dataTable">
                         <tr>
                             <th>Nazwa</th>
-                            <td>${location.name}</td>
+                            <td>${category.name}</td>
                         </tr>
                         <tr>
                             <th>Opis</th>
-                            <td>${location.description}</td>
+                            <td>${category.description}</td>
                         </tr>
                     </table>
                 </div>
@@ -53,7 +53,7 @@
                             <th>Nazwa</th>
                             <th>Zdjęcie</th>
                             <th>Opis</th>
-                            <th>Kategorie</th>
+                            <th>Lokalizacja</th>
                             <th>Akcje</th>
                         </tr>
                         </thead>
@@ -62,7 +62,7 @@
                             <th>Nazwa</th>
                             <th>Zdjęcie</th>
                             <th>Opis</th>
-                            <th>Kategorie</th>
+                            <th>Lokalizacja</th>
                             <th>Akcje</th>
                         </tr>
                         </tfoot>
@@ -72,11 +72,7 @@
                                 <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
                                 <td><img src="${item.itemImagePath}" width="auto" height="80"/></td>
                                 <td>${item.description}</td>
-                                <td>
-                                    <c:forEach var="category" items="${item.categories}">
-                                        <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
-                                    </c:forEach>
-                                </td>
+                                <td><a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a></td>
                                 <td>
                                     <a href="<c:url value="/app/item/edit/${item.id}"/>"
                                        class="btn btn-secondary btn-icon-split">

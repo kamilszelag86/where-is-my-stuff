@@ -1,5 +1,6 @@
 package pl.coderslab.whereismystuff.item.service;
 
+import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.user.entity.User;
@@ -13,6 +14,8 @@ public interface ItemService {
     List<Item> findAllByUser(User user);
 
     List<Item> findAllByLocation(Location location);
+
+    List<Item> findAllByCategory(Category category);
 
     Item findById(long itemId);
 

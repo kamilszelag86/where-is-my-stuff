@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAllByUser(User user) {
-        return categoryRepository.findAllByUser(user);
+        return categoryRepository.findAllByUserOrderByNameAsc(user);
     }
 
     @Override

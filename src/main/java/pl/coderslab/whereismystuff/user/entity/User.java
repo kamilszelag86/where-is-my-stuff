@@ -16,15 +16,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //    @NotBlank
     private String firstName;
-    //    @NotBlank
     private String lastName;
     @Column(nullable = false, unique = true, length = 60)
-//    @NotBlank
-//    @UniqueUsername
     private String username;
-    //    @NotBlank
     private String password;
     private boolean enabled;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
