@@ -72,4 +72,9 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.setReceiptImage(item, fileName);
     }
 
+    @Override
+    public boolean existsByLocation(Location location) {
+        return itemRepository.existsByLocation(location);
+    }
+
 }

@@ -94,6 +94,7 @@ public class LocationController {
             if (!currentUser.getUser().equals(toDelete.getUser())) {
                 throw new AccessDeniedException("Access denied");
             }
+            model.addAttribute("isEmpty", !itemService.existsByLocation(toDelete));
             model.addAttribute("locationId", locationId);
             return "location/confirm";
         } catch (EntityNotFoundException e) {

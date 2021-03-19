@@ -13,30 +13,41 @@
 
 <!--Begin Page Content-->
 <div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Czy na pewno chcesz usunąć kategorię??</h6>
-        </div>
-        <div class="card-body">
-            <div class="chart-bar">
-                <a href="<c:url value="/app/location/all"/>" class="btn btn-primary btn-icon-split btn-lg">
+    <c:choose>
+        <c:when test="${isEmpty}">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Czy na pewno chcesz usunąć lokalizację??</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <a href="<c:url value="/app/location/all"/>" class="btn btn-primary btn-icon-split btn-lg">
                         <span class="icon text-gray-600">
                           <i class="fas fa-arrow-right"></i>
                         </span>
-                    <span class="text">NIE</span>
-                </a><br><br>
-                <form:form method="post" action="./">
-                    <input type="hidden" name="locationId" value="${locationId}">
-                    <button type="submit" class="btn btn-danger btn-icon-split btn-lg">
+                            <span class="text">NIE</span>
+                        </a><br><br>
+                        <form:form method="post" action="./">
+                            <input type="hidden" name="locationId" value="${locationId}">
+                            <button type="submit" class="btn btn-danger btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                     </span>
-                        <span class="text">TAK</span>
-                    </button>
-                </form:form>
+                                <span class="text">TAK</span>
+                            </button>
+                        </form:form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </c:when>
+        <c:otherwise>
+            <div class="card mb-4 py-3 border-bottom-danger border-left-danger">
+                <div class="card-body">
+                    Nie możesz usunąć tej lokalizacji, ponieważ znajdują się w niej przedmioty !!!
+                </div>
+            </div>
+        </c:otherwise>
+    </c:choose>
 
 </div>
 <!-- /.container-fluid -->

@@ -26,4 +26,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("update Item i set i.receiptImage = :fileName where i = :item")
     void setReceiptImage(Item item, String fileName);
 
+    boolean existsByLocation(Location location);
+
 }
