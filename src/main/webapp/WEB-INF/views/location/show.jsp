@@ -34,9 +34,16 @@
                             <th>Opis</th>
                             <td>${location.description}</td>
                         </tr>
+                        <tr>
+                            <th>Adres</th>
+                            <td>${location.address}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="card shadow mb-4">
+            <iframe src="https://maps.google.com/maps?q=${location.address}&output=embed" width="150%" height="100%" style="border:1px" loading="lazy"></iframe>
         </div>
     </div>
 
