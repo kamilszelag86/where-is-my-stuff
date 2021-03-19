@@ -39,14 +39,14 @@ public class Item {
     private List<Category> categories;
 
     public String getItemImagePath() {
-        if (itemImage == null || id == null) {
+        if (itemImage == null || itemImage.isBlank() || id == null) {
             return null;
         }
         return "/item-images/" + id + "/" + itemImage;
     }
 
     public String getReceiptImagePath() {
-        if (receiptImage == null || id == null) {
+        if (receiptImage == null || receiptImage.isBlank() || id == null) {
             return null;
         }
         return "/item-images/" + id + "/" + receiptImage;

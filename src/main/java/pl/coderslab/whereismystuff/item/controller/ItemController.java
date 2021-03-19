@@ -153,6 +153,23 @@ public class ItemController {
         }
     }
 
+    @PostMapping("/image")
+    public String addImage(@RequestParam Item item, MultipartFile image) throws IOException {
+        if (!image.isEmpty()) {
+            saveItemImage(image, item);
+        }
+
+        return "redirect:/app/item/show/" + item.getId();
+    }
+
+    @PostMapping("/receipt")
+    public String addReceipt(@RequestParam Item item, MultipartFile receipt) throws IOException {
+        if (!receipt.isEmpty()) {
+            saveReceiptImage(receipt, item);
+        }
+        return "redirect:/app/item/show/" + item.getId();
+    }
+
     // saving image file for itemImage
     private void saveItemImage(MultipartFile multipartFile, Item item) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
