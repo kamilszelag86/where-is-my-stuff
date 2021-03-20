@@ -42,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(long categoryId) {
         if (categoryRepository.existsById(categoryId)) {
+            categoryRepository.clearCategory(categoryId);
             categoryRepository.deleteById(categoryId);
         }
     }

@@ -1,6 +1,8 @@
 package pl.coderslab.whereismystuff.category.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.user.entity.User;
@@ -13,5 +15,9 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<Category> findAllByUserOrderByNameAsc(User user);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM project.items_categories WHERE categories_id = :categoryId")
+    void clearCategory(long categoryId);
 
 }
