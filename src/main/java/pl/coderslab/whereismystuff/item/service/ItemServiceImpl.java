@@ -73,6 +73,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public void setLocation(List<Item> items, Location location) {
+        items.forEach(item -> itemRepository.setLocation(item, location));
+    }
+
+    @Override
     public boolean existsByLocation(Location location) {
         return itemRepository.existsByLocation(location);
     }

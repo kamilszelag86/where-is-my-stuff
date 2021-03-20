@@ -27,6 +27,8 @@ public interface ItemService {
 
     void setReceiptImage(Item item, String fileName);
 
+    void setLocation(List<Item> items, Location location);
+
     boolean existsByLocation(Location location);
 
 }

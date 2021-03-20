@@ -170,6 +170,15 @@ public class ItemController {
         return "redirect:/app/item/show/" + item.getId();
     }
 
+    @PostMapping("/location")
+    public String setLocation(@RequestParam(name = "itemsToMove", required = false) List<Item> itemsToMove,
+                              @RequestParam Location location) {
+        if (itemsToMove != null && !itemsToMove.isEmpty()) {
+            itemService.setLocation(itemsToMove, location);
+        }
+        return "redirect:/app/item/all";
+    }
+
     // saving image file for itemImage
     private void saveItemImage(MultipartFile multipartFile, Item item) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
