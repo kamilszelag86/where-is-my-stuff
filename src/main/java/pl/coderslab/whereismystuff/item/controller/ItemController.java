@@ -128,10 +128,10 @@ public class ItemController {
 
     @PostMapping("/delete")
     public String deleteItem(@RequestParam Item item) throws IOException {
-        if (item.getItemImage() != null) {
+        if (item.getItemImagePath() != null) {
             FileUploadUtil.deleteFile(item.getItemImagePath());
         }
-        if (item.getReceiptImage() != null) {
+        if (item.getReceiptImagePath() != null) {
             FileUploadUtil.deleteFile(item.getReceiptImagePath());
         }
         itemService.delete(item.getId());
