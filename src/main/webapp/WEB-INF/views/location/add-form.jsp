@@ -30,6 +30,9 @@
                     <form:errors path="name" cssClass="alert-danger"/><br>
                     Opis:<br>
                     <form:input path="description"/><br><br>
+                    Address:<br>
+                    <form:input path="address"/><br>
+                    <form:errors path="address" cssClass="alert-danger"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>

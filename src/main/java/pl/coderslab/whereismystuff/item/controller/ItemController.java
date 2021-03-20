@@ -128,10 +128,10 @@ public class ItemController {
 
     @PostMapping("/delete")
     public String deleteItem(@RequestParam Item item) throws IOException {
-        if (item.getItemImage() != null) {
+        if (item.getItemImagePath() != null) {
             FileUploadUtil.deleteFile(item.getItemImagePath());
         }
-        if (item.getReceiptImage() != null) {
+        if (item.getReceiptImagePath() != null) {
             FileUploadUtil.deleteFile(item.getReceiptImagePath());
         }
         itemService.delete(item.getId());
@@ -151,6 +151,32 @@ public class ItemController {
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/image")
+    public String addImage(@RequestParam Item item, MultipartFile image) throws IOException {
+        if (!image.isEmpty()) {
+            saveItemImage(image, item);
+        }
+
+        return "redirect:/app/item/show/" + item.getId();
+    }
+
+    @PostMapping("/receipt")
+    public String addReceipt(@RequestParam Item item, MultipartFile receipt) throws IOException {
+        if (!receipt.isEmpty()) {
+            saveReceiptImage(receipt, item);
+        }
+        return "redirect:/app/item/show/" + item.getId();
+    }
+
+    @PostMapping("/location")
+    public String setLocation(@RequestParam(name = "itemsToMove", required = false) List<Item> itemsToMove,
+                              @RequestParam Location location) {
+        if (itemsToMove != null && !itemsToMove.isEmpty()) {
+            itemService.setLocation(itemsToMove, location);
+        }
+        return "redirect:/app/item/all";
     }
 
     // saving image file for itemImage

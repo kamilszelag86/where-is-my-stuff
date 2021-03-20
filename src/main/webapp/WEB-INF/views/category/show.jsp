@@ -14,17 +14,36 @@
 <!--Begin Page Content-->
 <div class="container-fluid">
 
-    <a href="<c:url value="/app/location/add"/>" class="btn btn-secondary btn-icon-split btn-lg">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-arrow-right"></i>
-                    </span>
-        <span class="text">Dodaj lokalizację</span>
-    </a><br><br>
-    <!-- DataTales Example -->
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Szczegóły kategorii</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered dataTable">
+                        <tr>
+                            <th>Nazwa</th>
+                            <td>${category.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Opis</th>
+                            <td>${category.description}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista lokalizacji</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lista przedmiotów w danej lokalizacji</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -32,33 +51,37 @@
                         <thead>
                         <tr>
                             <th>Nazwa</th>
+                            <th>Zdjęcie</th>
                             <th>Opis</th>
+                            <th>Lokalizacja</th>
                             <th>Akcje</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Nazwa</th>
+                            <th>Zdjęcie</th>
                             <th>Opis</th>
+                            <th>Lokalizacja</th>
                             <th>Akcje</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach var="location" items="${locations}">
+                        <c:forEach var="item" items="${items}">
                             <tr>
+                                <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
+                                <td><img src="${item.itemImagePath}" width="auto" height="80"/></td>
+                                <td>${item.description}</td>
+                                <td><a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a></td>
                                 <td>
-                                    <a href="<c:url value="/app/location/show/${location.id}"/>">${location.name}</a>
-                                </td>
-                                <td>${location.description}</td>
-                                <td>
-                                    <a href="<c:url value="/app/location/edit/${location.id}"/>"
+                                    <a href="<c:url value="/app/item/edit/${item.id}"/>"
                                        class="btn btn-secondary btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
                                         <span class="text">Edytuj</span>
                                     </a>
-                                    <a href="<c:url value="/app/location/delete/${location.id}"/>"
+                                    <a href="<c:url value="/app/item/delete/${item.id}"/>"
                                        class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
@@ -74,6 +97,7 @@
             </div>
         </div>
     </div>
+
 </div>
 <!-- /.container-fluid -->
 

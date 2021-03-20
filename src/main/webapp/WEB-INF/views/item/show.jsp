@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <jsp:include page="../fragments/head.jsp"/>
@@ -36,13 +36,15 @@
                         </tr>
                         <tr>
                             <th>Lokalizacja</th>
-                            <td>${item.location.name}</td>
+                            <td>
+                                <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
+                            </td>
                         </tr>
                         <tr>
                             <th>Kategorie</th>
                             <td>
                                 <c:forEach var="category" items="${item.categories}">
-                                    <p>${category.name}</p>
+                                    <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
                                 </c:forEach>
                             </td>
                         </tr>
@@ -58,8 +60,25 @@
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="${item.itemImagePath}"
-                         alt="">
+                    <c:choose>
+                        <c:when test="${not empty item.itemImagePath}">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 30rem;"
+                                 src="${item.itemImagePath}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <form:form action="/app/item/image" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="item" value="${item.id}"/>
+                                Dodaj zdjęcie przedmiotu:<br><br>
+                                <input type="file" name="image" accept="image/*"/><br><br>
+                                <button type="submit" class="btn btn-success btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Zapisz zdjęcie</span>
+                                </button>
+                            </form:form>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -72,8 +91,25 @@
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="${item.receiptImagePath}"
-                         alt="">
+                    <c:choose>
+                        <c:when test="${not empty item.receiptImagePath}">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                 src="${item.receiptImagePath}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <form:form action="/app/item/receipt" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="item" value="${item.id}"/>
+                                Dodaj zdjęcie paragonu:<br><br>
+                                <input type="file" name="receipt" accept="image/*"/><br><br>
+                                <button type="submit" class="btn btn-success btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Zapisz zdjęcie</span>
+                                </button>
+                            </form:form>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

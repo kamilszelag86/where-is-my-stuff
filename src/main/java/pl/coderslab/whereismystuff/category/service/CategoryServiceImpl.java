@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAllByUser(User user) {
-        return categoryRepository.findAllByUser(user);
+        return categoryRepository.findAllByUserOrderByNameAsc(user);
     }
 
     @Override
@@ -48,6 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(long categoryId) {
         if (categoryRepository.existsById(categoryId)) {
+            categoryRepository.clearCategory(categoryId);
             categoryRepository.deleteById(categoryId);
         }
     }

@@ -1,5 +1,6 @@
 package pl.coderslab.whereismystuff.item.service;
 
+import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.location.entity.Location;
@@ -17,6 +18,8 @@ public interface ItemService {
 
     List<Item> findAllByLocation(Location location);
 
+    List<Item> findAllByCategory(Category category);
+
     Item findById(long itemId);
 
     Item update(Item item);
@@ -26,5 +29,9 @@ public interface ItemService {
     void setItemImage(Item item, String fileName);
 
     void setReceiptImage(Item item, String fileName);
+
+    void setLocation(List<Item> items, Location location);
+
+    boolean existsByLocation(Location location);
 
 }

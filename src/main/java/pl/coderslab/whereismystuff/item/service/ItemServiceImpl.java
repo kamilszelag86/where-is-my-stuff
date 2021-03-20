@@ -2,6 +2,7 @@ package pl.coderslab.whereismystuff.item.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
 import pl.coderslab.whereismystuff.location.entity.Location;
@@ -32,6 +33,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> findAllByLocation(Location location) {
         return itemRepository.findAllByLocation(location);
+    }
+
+    @Override
+    public List<Item> findAllByCategory(Category category) {
+        return itemRepository.findAllByCategories(category);
     }
 
     @Override
@@ -67,6 +73,16 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void setReceiptImage(Item item, String fileName) {
         itemRepository.setReceiptImage(item, fileName);
+    }
+
+    @Override
+    public void setLocation(List<Item> items, Location location) {
+        items.forEach(item -> itemRepository.setLocation(item, location));
+    }
+
+    @Override
+    public boolean existsByLocation(Location location) {
+        return itemRepository.existsByLocation(location);
     }
 
 }

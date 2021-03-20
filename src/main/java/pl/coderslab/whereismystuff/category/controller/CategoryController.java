@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.category.service.CategoryService;
+import pl.coderslab.whereismystuff.item.service.ItemService;
+import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final ItemService itemService;
 
     @GetMapping("all")
     public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
@@ -42,6 +45,22 @@ public class CategoryController {
         }
         categoryService.save(category);
         return "redirect:/app/category/all";
+    }
+
+    @GetMapping("/show/{categoryId}")
+    public String showLocation(@AuthenticationPrincipal CurrentUser currentUser,
+                               @PathVariable long categoryId, Model model) {
+        try {
+            Category category = categoryService.findById(categoryId);
+            if (!currentUser.getUser().equals(category.getUser())) {
+                throw new AccessDeniedException("Access denied");
+            }
+            model.addAttribute("category", category);
+            model.addAttribute("items", itemService.findAllByCategory(category));
+            return "category/show";
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/edit/{categoryId}")

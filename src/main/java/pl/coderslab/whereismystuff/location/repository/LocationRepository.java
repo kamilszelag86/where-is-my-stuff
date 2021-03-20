@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    List<Location> findAllByUser(User user);
+    List<Location> findAllByUserOrderByNameAsc(User user);
 
     List<Location> findAllByTeam(Team team);
 

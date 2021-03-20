@@ -34,9 +34,16 @@
                             <th>Opis</th>
                             <td>${location.description}</td>
                         </tr>
+                        <tr>
+                            <th>Adres</th>
+                            <td>${location.address}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="card shadow mb-4">
+            <iframe src="https://maps.google.com/maps?q=${location.address}&output=embed" width="150%" height="100%" style="border:1px" loading="lazy"></iframe>
         </div>
     </div>
 
@@ -51,6 +58,7 @@
                         <thead>
                         <tr>
                             <th>Nazwa</th>
+                            <th>Zdjęcie</th>
                             <th>Opis</th>
                             <th>Kategorie</th>
                             <th>Akcje</th>
@@ -59,6 +67,7 @@
                         <tfoot>
                         <tr>
                             <th>Nazwa</th>
+                            <th>Zdjęcie</th>
                             <th>Opis</th>
                             <th>Kategorie</th>
                             <th>Akcje</th>
@@ -67,11 +76,12 @@
                         <tbody>
                         <c:forEach var="item" items="${items}">
                             <tr>
-                                <td>${item.name}</td>
+                                <td><a href="<c:url value="/app/item/show/${item.id}"/>">${item.name}</a></td>
+                                <td><img src="${item.itemImagePath}" width="auto" height="80"/></td>
                                 <td>${item.description}</td>
                                 <td>
                                     <c:forEach var="category" items="${item.categories}">
-                                        <p>${category.name}</p>
+                                        <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
                                     </c:forEach>
                                 </td>
                                 <td>

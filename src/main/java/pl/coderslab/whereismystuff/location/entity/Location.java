@@ -24,6 +24,9 @@ public class Location {
 
     private String description;
 
+    @NotBlank
+    private String address;
+
     @ManyToOne
     @NotNull
     private User user;
