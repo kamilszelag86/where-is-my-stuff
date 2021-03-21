@@ -6,7 +6,6 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +17,6 @@ import pl.coderslab.whereismystuff.item.service.ItemService;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.location.service.LocationService;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
-import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -65,10 +63,10 @@ public class ItemController {
         }
         Item created = itemService.create(item);
         if (!image.isEmpty()) {
-            saveItemImage(image, created);
+            itemService.setItemImage(created, image);
         }
         if (!receipt.isEmpty()) {
-            saveReceiptImage(receipt, created);
+            itemService.setReceiptImage(created, receipt);
         }
         return "redirect:/app/item/all";
     }
@@ -97,16 +95,10 @@ public class ItemController {
         }
         Item updated = itemService.update(item);
         if (!image.isEmpty()) {
-            if (!item.getItemImage().isEmpty()) {
-                FileUploadUtil.deleteFile(item.getItemImagePath());
-            }
-            saveItemImage(image, updated);
+            itemService.setItemImage(updated, image);
         }
         if (!receipt.isEmpty()) {
-            if (!item.getReceiptImage().isEmpty()) {
-                FileUploadUtil.deleteFile(item.getReceiptImagePath());
-            }
-            saveReceiptImage(receipt, updated);
+            itemService.setReceiptImage(updated, receipt);
         }
         return "redirect:/app/item/all";
     }
@@ -128,13 +120,7 @@ public class ItemController {
 
     @PostMapping("/delete")
     public String deleteItem(@RequestParam Item item) throws IOException {
-        if (item.getItemImagePath() != null) {
-            FileUploadUtil.deleteFile(item.getItemImagePath());
-        }
-        if (item.getReceiptImagePath() != null) {
-            FileUploadUtil.deleteFile(item.getReceiptImagePath());
-        }
-        itemService.delete(item.getId());
+        itemService.delete(item);
         return "redirect:/app/item/all";
     }
 
@@ -156,16 +142,15 @@ public class ItemController {
     @PostMapping("/image")
     public String addImage(@RequestParam Item item, MultipartFile image) throws IOException {
         if (!image.isEmpty()) {
-            saveItemImage(image, item);
+            itemService.setItemImage(item, image);
         }
-
         return "redirect:/app/item/show/" + item.getId();
     }
 
     @PostMapping("/receipt")
     public String addReceipt(@RequestParam Item item, MultipartFile receipt) throws IOException {
         if (!receipt.isEmpty()) {
-            saveReceiptImage(receipt, item);
+            itemService.setReceiptImage(item, receipt);
         }
         return "redirect:/app/item/show/" + item.getId();
     }
@@ -179,21 +164,4 @@ public class ItemController {
         return "redirect:/app/item/all";
     }
 
-    // saving image file for itemImage
-    private void saveItemImage(MultipartFile multipartFile, Item item) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = "item-images/" + item.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        itemService.setItemImage(item, fileName);
-    }
-
-    // saving image file for receiptImage
-    private void saveReceiptImage(MultipartFile multipartFile, Item item) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = "item-images/" + item.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        itemService.setReceiptImage(item, fileName);
-    }
-
 }
-

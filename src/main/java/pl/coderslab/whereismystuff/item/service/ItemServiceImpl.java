@@ -2,15 +2,19 @@ package pl.coderslab.whereismystuff.item.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import pl.coderslab.whereismystuff.category.entity.Category;
 import pl.coderslab.whereismystuff.item.entity.Item;
 import pl.coderslab.whereismystuff.item.repository.ItemRepository;
 import pl.coderslab.whereismystuff.location.entity.Location;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
+import pl.coderslab.whereismystuff.utils.FileUploadUtil;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -59,19 +63,37 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void delete(long itemId) {
-        if (itemRepository.existsById(itemId)) {
-            itemRepository.deleteById(itemId);
+    public void delete(Item item) throws IOException {
+        if (itemRepository.existsById(item.getId())) {
+            if (item.getItemImagePath() != null) {
+                FileUploadUtil.deleteFile(item.getItemImagePath());
+            }
+            if (item.getReceiptImagePath() != null) {
+                FileUploadUtil.deleteFile(item.getReceiptImagePath());
+            }
+            itemRepository.deleteById(item.getId());
         }
     }
 
     @Override
-    public void setItemImage(Item item, String fileName) {
+    public void setItemImage(Item item, MultipartFile multipartFile) throws IOException {
+        if (item.getItemImagePath() != null) {
+            FileUploadUtil.deleteFile(item.getItemImagePath());
+        }
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "item-images/" + item.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         itemRepository.setItemImage(item, fileName);
     }
 
     @Override
-    public void setReceiptImage(Item item, String fileName) {
+    public void setReceiptImage(Item item, MultipartFile multipartFile) throws IOException {
+        if (item.getReceiptImagePath() != null) {
+            FileUploadUtil.deleteFile(item.getReceiptImagePath());
+        }
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "item-images/" + item.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         itemRepository.setReceiptImage(item, fileName);
     }
 
