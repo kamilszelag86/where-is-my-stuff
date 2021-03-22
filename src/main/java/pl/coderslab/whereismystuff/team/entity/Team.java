@@ -21,7 +21,7 @@ public class Team {
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    private Set<User> members;
+//    @OneToMany(mappedBy = "team")
+//    private Set<User> members;
 
 }

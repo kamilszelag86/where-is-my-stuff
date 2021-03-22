@@ -26,7 +26,7 @@ public class LocationController {
     private final ItemService itemService;
 
     @GetMapping("/all")
-    public String allCategories(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+    public String allLocations(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("locations", locationService.findAllByTeam(currentUser.getUser().getTeam()));
         return "location/list";
     }
@@ -51,7 +51,7 @@ public class LocationController {
                                @PathVariable long locationId, Model model) {
         try {
             Location location = locationService.findById(locationId);
-            if (!currentUser.getUser().equals(location.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(location.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("location", location);

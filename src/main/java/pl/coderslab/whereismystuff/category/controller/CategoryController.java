@@ -52,7 +52,7 @@ public class CategoryController {
                                @PathVariable long categoryId, Model model) {
         try {
             Category category = categoryService.findById(categoryId);
-            if (!currentUser.getUser().equals(category.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(category.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("category", category);
