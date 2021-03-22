@@ -5,9 +5,12 @@ import org.apache.commons.collections4.SetUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.security.RoleRepository;
+import pl.coderslab.whereismystuff.team.entity.JoinTeamRequest;
+import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.repository.UserRepository;
 
+import javax.persistence.criteria.Join;
 import javax.transaction.Transactional;
 
 @Service
@@ -32,12 +35,17 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
     @Override
     public void updateUser(User user) {
         if (userRepository.existsById(user.getId())) {
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public void setTeamForUser(Team team, User user) {
+        user.setTeam(team);
+        updateUser(user);
     }
 
 }

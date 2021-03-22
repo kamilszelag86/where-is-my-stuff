@@ -51,7 +51,7 @@ public class LocationController {
                                @PathVariable long locationId, Model model) {
         try {
             Location location = locationService.findById(locationId);
-            if (!currentUser.getUser().equals(location.getUser())) {
+            if (!currentUser.getUser().getTeam().equals(location.getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("location", location);

@@ -54,7 +54,6 @@ public class HomeController {
 
     @GetMapping("/app")
     public String dashboard(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("currentUser", currentUser);
         if (currentUser.getUser().getTeam() != null) {
             return "dashboard";
         } else {
@@ -71,20 +70,14 @@ public class HomeController {
             return "user/select-team";
         }
         Team created = teamService.create(team);
-        setTeamForUser(created, currentUser);
+        userService.setTeamForUser(created, currentUser.getUser());
         return "redirect:/app";
     }
 
     @PostMapping("app/team/add")
     public String joinTeam(@RequestParam Team team, @AuthenticationPrincipal CurrentUser currentUser) {
-        setTeamForUser(team, currentUser);
+        teamService.createJoinTeamRequest(team, currentUser.getUser());
         return "redirect:/app";
-    }
-
-    private void setTeamForUser(Team team, CurrentUser currentUser) {
-        User user = currentUser.getUser();
-        user.setTeam(team);
-        userService.updateUser(user);
     }
 
 }
