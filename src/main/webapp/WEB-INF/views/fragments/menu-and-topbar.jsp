@@ -40,14 +40,14 @@
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
-        
-        <c:if test="${user.team.haveActiveRequests}">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/app/category/all"/>">
-                    <i class="fas fa-fw "></i>
-                    <span>Żądania dołączenia do zespołu</span></a>
-            </li>
-        </c:if>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/app/team"/>">
+                <i class="fas fa-fw "></i>
+                <span>Zespół</span></a>
+        </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

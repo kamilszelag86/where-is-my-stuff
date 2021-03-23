@@ -12,6 +12,7 @@ import pl.coderslab.whereismystuff.user.repository.UserRepository;
 
 import javax.persistence.criteria.Join;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,4 +49,8 @@ public class UserServiceImpl implements UserService {
         updateUser(user);
     }
 
+    @Override
+    public List<User> findAllByTeam(Team team) {
+        return userRepository.findAllByTeam(team);
+    }
 }

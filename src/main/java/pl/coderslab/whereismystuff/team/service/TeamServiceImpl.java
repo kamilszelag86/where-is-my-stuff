@@ -38,4 +38,9 @@ public class TeamServiceImpl implements TeamService {
         user.setJoinTeamRequest(joinTeamRequestRepository.save(joinTeamRequest));
     }
 
+    @Override
+    public List<JoinTeamRequest> findAllActiveJoinRequests(Team team) {
+        return joinTeamRequestRepository.findAllByTeamAndActiveIsTrue(team);
+    }
+
 }

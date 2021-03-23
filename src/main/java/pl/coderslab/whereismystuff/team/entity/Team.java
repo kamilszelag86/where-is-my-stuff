@@ -27,25 +27,24 @@ public class Team {
 //    @OneToMany(mappedBy = "team")
 //    private Set<User> members;
 
-    @OneToMany(mappedBy = "team")
-    private List<JoinTeamRequest> joinTeamRequests;
+//    @OneToMany(mappedBy = "team")
+//    private List<JoinTeamRequest> joinTeamRequests;
+//
+//    @Transient
+//    private boolean haveActiveRequests = checkActiveRequests();
+//
+//    private boolean checkActiveRequests() {
+//        if (joinTeamRequests != null) {
+//            return joinTeamRequests.stream().anyMatch(JoinTeamRequest::isActive);
+//        }
+//        return false;
+//    }
 
-    @Transient
-    private boolean haveActiveRequests = checkActiveRequests();
-
-    private boolean checkActiveRequests() {
-        if (joinTeamRequests != null) {
-            return joinTeamRequests.stream().anyMatch(JoinTeamRequest::isActive);
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", haveActiveRequests=" + haveActiveRequests +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Team{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
 }
