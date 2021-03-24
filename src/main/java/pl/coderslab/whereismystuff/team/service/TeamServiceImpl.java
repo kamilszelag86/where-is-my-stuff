@@ -43,4 +43,16 @@ public class TeamServiceImpl implements TeamService {
         return joinTeamRequestRepository.findAllByTeamAndActiveIsTrue(team);
     }
 
+    @Override
+    public void approveJoinTeamRequest(JoinTeamRequest request) {
+        request.getUser().setTeam(request.getTeam());
+        request.setApproved(true);
+        request.setActive(false);
+    }
+
+    @Override
+    public void rejectJoinTeamRequest(JoinTeamRequest request) {
+        request.setRejected(true);
+        request.setActive(false);
+    }
 }

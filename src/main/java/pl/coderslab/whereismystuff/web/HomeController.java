@@ -63,21 +63,4 @@ public class HomeController {
         }
     }
 
-    @PostMapping("app/team/create")
-    public String createTeam(@ModelAttribute("newTeam") @Valid Team team, BindingResult result,
-                             @AuthenticationPrincipal CurrentUser currentUser) {
-        if (result.hasErrors()) {
-            return "user/select-team";
-        }
-        Team created = teamService.create(team);
-        userService.setTeamForUser(created, currentUser.getUser());
-        return "redirect:/app";
-    }
-
-    @PostMapping("app/team/add")
-    public String joinTeam(@RequestParam Team team, @AuthenticationPrincipal CurrentUser currentUser) {
-        teamService.createJoinTeamRequest(team, currentUser.getUser());
-        return "redirect:/app";
-    }
-
 }

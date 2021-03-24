@@ -50,7 +50,7 @@
             </div>
             <br><br>
             <div>
-                <form:form method="post" action="app/team/add">
+                <form:form method="post" action="app/team/join">
                     Wybierz zespół:<br>
                     <select name="team">
                         <c:forEach var="t" items="${teams}">
