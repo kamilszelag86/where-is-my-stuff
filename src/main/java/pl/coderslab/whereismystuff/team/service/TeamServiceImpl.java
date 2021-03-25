@@ -31,6 +31,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void createJoinTeamRequest(Team team, User user) {
+        if (user.getJoinTeamRequest() != null) {
+            joinTeamRequestRepository.delete(user.getJoinTeamRequest());
+        }
         JoinTeamRequest joinTeamRequest = new JoinTeamRequest();
         joinTeamRequest.setTeam(team);
         joinTeamRequest.setUser(user);

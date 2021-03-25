@@ -36,4 +36,6 @@ public interface ItemService {
 
     boolean existsByLocation(Location location);
 
+    long countByTeam(Team team);
+
 }

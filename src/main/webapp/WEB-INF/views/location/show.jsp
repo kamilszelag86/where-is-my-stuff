@@ -38,6 +38,10 @@
                             <th>Adres</th>
                             <td>${location.address}</td>
                         </tr>
+                        <tr>
+                            <th>Ilość przechowywanych przedmiotów</th>
+                            <td>${items.size()}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

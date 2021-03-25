@@ -2,12 +2,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
+<sec:authentication property="principal.user" var="user"/>
 <jsp:include page="../fragments/head.jsp"/>
-
 <body id="page-top">
 
 <jsp:include page="../fragments/menu-and-topbar.jsp"/>
@@ -17,7 +18,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Twój zespół</h1>
+        <h1 class="h3 mb-0 text-gray-800">Twój zespół: ${user.team.name}</h1>
     </div>
 
     <c:if test="${not empty activeRequests}">

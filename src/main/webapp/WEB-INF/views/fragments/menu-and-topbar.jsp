@@ -18,36 +18,37 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Nav Item - Items -->
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/app/item/all"/>">
-                <i class="fas fa-fw "></i>
-                <span>Przedmioty</span></a>
-        </li>
+        <c:if test="${not empty user.team}">
+            <!-- Nav Item - Items -->
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/app/item/all"/>">
+                    <i class="fas fa-fw "></i>
+                    <span>Przedmioty</span></a>
+            </li>
 
-        <!-- Nav Item - Locations -->
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/app/location/all"/>">
-                <i class="fas fa-fw "></i>
-                <span>Lokalizacje</span></a>
-        </li>
+            <!-- Nav Item - Locations -->
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/app/location/all"/>">
+                    <i class="fas fa-fw "></i>
+                    <span>Lokalizacje</span></a>
+            </li>
 
-        <!-- Nav Item - Categories -->
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/app/category/all"/>">
-                <i class="fas fa-fw "></i>
-                <span>Kategorie</span></a>
-        </li>
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Nav Item - Categories -->
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/app/category/all"/>">
+                    <i class="fas fa-fw "></i>
+                    <span>Kategorie</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
 
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/app/team"/>">
-                <i class="fas fa-fw "></i>
-                <span>Zespół</span></a>
-        </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/app/team"/>">
+                    <i class="fas fa-fw "></i>
+                    <span>Zespół</span></a>
+            </li>
+        </c:if>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -72,10 +73,6 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
-
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Twój zespół: ${user.team.name}</h6>
-                </div>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">

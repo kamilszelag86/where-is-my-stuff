@@ -36,4 +36,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     boolean existsByLocation(Location location);
 
+    long countByTeam(Team team);
+
 }

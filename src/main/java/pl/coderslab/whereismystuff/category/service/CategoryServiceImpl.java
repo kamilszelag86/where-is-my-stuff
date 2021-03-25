@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAllByTeam(Team team) {
-        return categoryRepository.findAllByTeam(team);
+        return categoryRepository.findAllByTeamOrderByNameAsc(team);
     }
 
     @Override
