@@ -15,9 +15,7 @@ import java.util.List;
 @Transactional
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    List<Category> findAllByUser(User user);
-
-    List<Category> findAllByTeam(Team team);
+    List<Category> findAllByTeamOrderByNameAsc(Team team);
 
     List<Category> findAllByUserOrderByNameAsc(User user);
 

@@ -25,7 +25,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Location> findAllByTeam(Team team) {
-        return locationRepository.findAllByTeam(team);
+        return locationRepository.findAllByTeamOrderByNameAsc(team);
     }
 
     @Override
@@ -52,4 +52,8 @@ public class LocationServiceImpl implements LocationService {
         }
     }
 
+    @Override
+    public long countByTeam(Team team) {
+        return locationRepository.countByTeam(team);
+    }
 }

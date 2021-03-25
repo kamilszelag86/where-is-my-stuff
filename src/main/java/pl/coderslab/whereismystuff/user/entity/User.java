@@ -1,6 +1,7 @@
 package pl.coderslab.whereismystuff.user.entity;
 
 import lombok.Data;
+import pl.coderslab.whereismystuff.team.entity.JoinTeamRequest;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.security.entity.Role;
 
@@ -23,6 +24,7 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -31,4 +33,17 @@ public class User {
     @ManyToOne
     private Team team;
 
+    @OneToOne(mappedBy = "user")
+    private JoinTeamRequest joinTeamRequest;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", enabled=" + enabled +
+                '}';
+    }
 }

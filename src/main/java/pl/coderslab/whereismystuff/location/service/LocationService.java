@@ -20,4 +20,5 @@ public interface LocationService {
 
     void delete(long locationId);
 
+    long countByTeam(Team team);
 }

@@ -1,33 +1,104 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<div>
-    Aby móc korzystać z aplikacji musisz należeć do zespołu.<br>
-    Stwórz nowy zespół lub dołącz do jednego z już istniejących.
-</div><br>
-<div>
-    <form:form method="post" action="app/team/create" modelAttribute="newTeam">
-        Nazwa:<br>
-        <form:input path="name"/><br>
-        <input type="submit" value="Stwórz zespół">
-    </form:form>
+<!DOCTYPE html>
+<html lang="en">
+
+<sec:authentication property="principal.user" var="user"/>
+<jsp:include page="../fragments/head.jsp"/>
+<body id="page-top">
+
+<jsp:include page="../fragments/menu-and-topbar.jsp"/>
+
+<!--Begin Page Content-->
+<div class="container-fluid">
+
+    <c:choose>
+        <c:when test="${user.joinTeamRequest.active}">
+            <div class="row">
+                <div class="card mb-4 py-3 border-bottom-info border-left-info border-info">
+                    <div class="card-body text-info">
+                        Twoja prośba o dołączenie do zespołu ${user.joinTeamRequest.team.name} czeka na akceptację.
+                    </div>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <c:if test="${user.joinTeamRequest.rejected}">
+                <div class="row">
+                    <div class="card mb-4 py-3 border-bottom-danger border-left-danger border-danger">
+                        <div class="card-body text-danger">
+                            Twoja prośba o dołączenie do zespołu ${user.joinTeamRequest.team.name} została odrzucona.
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <p class="mb-4">
+                Aby móc korzystać z aplikacji musisz należeć do zespołu.<br>
+                Stwórz nowy zespół lub dołącz do jednego z już istniejących.<br>
+            </p>
+            <div class="row">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Stwórz nowy zespół</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form:form method="post" action="app/team/create" modelAttribute="newTeam">
+                                Nazwa:<br>
+                                <form:input path="name"/><br>
+                                <form:errors path="name" cssClass="alert-danger"/><br>
+                                <button type="submit" class="btn btn-success btn-icon-split btn-lg">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                                    <span class="text">Stwórz zespół</span>
+                                </button>
+                            </form:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Dołącz do zespołu</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form:form method="post" action="app/team/join">
+                                Wybierz zespół:<br>
+                                <select name="team">
+                                    <c:forEach var="t" items="${teams}">
+                                        <option value="${t.id}">${t.name}</option>
+                                    </c:forEach>
+                                </select><br><br>
+                                <button type="submit" class="btn btn-secondary btn-icon-split btn-lg">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                                    <span class="text">Dołącz do zespołu</span>
+                                </button>
+                            </form:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </c:otherwise>
+    </c:choose>
+
 </div>
-<br><br>
-<div>
-    <form:form method="post" action="app/team/add">
-        Wybierz zespół:<br>
-        <select name="team">
-            <c:forEach var="t" items="${teams}">
-                <option value="${t.id}">${t.name}</option>
-            </c:forEach>
-        </select><br>
-        <input type="submit" value="Dołącz">
-    </form:form>
-</div>
+<!-- /.container-fluid -->
+
+<jsp:include page="../fragments/foot.jsp"/>
+<!-- Page level plugins -->
+<script src="<c:url value="/theme/vendor/datatables/jquery.dataTables.min.js"/>"></script>
+<script src="<c:url value="/theme/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
+
+<!-- Page level custom scripts -->
+<script src="<c:url value="/theme/js/demo/datatables-demo.js"/>"></script>
 </body>
+
 </html>

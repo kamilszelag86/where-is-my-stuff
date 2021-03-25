@@ -107,4 +107,8 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.existsByLocation(location);
     }
 
+    @Override
+    public long countByTeam(Team team) {
+        return itemRepository.countByTeam(team);
+    }
 }

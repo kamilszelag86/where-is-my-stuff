@@ -10,4 +10,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface TeamRepository extends JpaRepository<Team, Long> {
 
+    Team findByName(String teamName);
+
 }

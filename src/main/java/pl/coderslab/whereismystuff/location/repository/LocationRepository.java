@@ -11,6 +11,8 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     List<Location> findAllByUserOrderByNameAsc(User user);
 
-    List<Location> findAllByTeam(Team team);
+    List<Location> findAllByTeamOrderByNameAsc(Team team);
+
+    long countByTeam(Team team);
 
 }

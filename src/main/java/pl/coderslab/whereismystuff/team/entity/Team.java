@@ -1,11 +1,10 @@
 package pl.coderslab.whereismystuff.team.entity;
 
 import lombok.Data;
-import pl.coderslab.whereismystuff.user.entity.User;
+import pl.coderslab.whereismystuff.team.validation.UniqueTeamName;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
 @Table(name = Team.TABLE_NAME)
@@ -19,9 +18,7 @@ public class Team {
     private Long id;
 
     @NotBlank
+    @UniqueTeamName
     private String name;
-
-//    @OneToMany(mappedBy = "team")
-//    private Set<User> members;
 
 }
