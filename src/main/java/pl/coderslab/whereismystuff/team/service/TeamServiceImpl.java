@@ -20,6 +20,11 @@ public class TeamServiceImpl implements TeamService {
     private final JoinTeamRequestRepository joinTeamRequestRepository;
 
     @Override
+    public Team findByName(String teamName) {
+        return teamRepository.findByName(teamName);
+    }
+
+    @Override
     public List<Team> findAll() {
         return teamRepository.findAll();
     }

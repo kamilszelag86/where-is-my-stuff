@@ -50,6 +50,7 @@
                             <form:form method="post" action="app/team/create" modelAttribute="newTeam">
                                 Nazwa:<br>
                                 <form:input path="name"/><br>
+                                <form:errors path="name" cssClass="alert-danger"/><br>
                                 <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
@@ -72,7 +73,7 @@
                                     <c:forEach var="t" items="${teams}">
                                         <option value="${t.id}">${t.name}</option>
                                     </c:forEach>
-                                </select><br>
+                                </select><br><br>
                                 <button type="submit" class="btn btn-secondary btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>

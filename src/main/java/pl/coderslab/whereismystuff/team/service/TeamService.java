@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TeamService {
 
+    Team findByName(String teamName);
+
     List<Team> findAll();
 
     Team create(Team team);
