@@ -10,11 +10,9 @@ import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 import pl.coderslab.whereismystuff.team.entity.JoinTeamRequest;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.team.service.TeamService;
-import pl.coderslab.whereismystuff.user.entity.User;
 import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,7 +41,14 @@ public class TeamController {
     }
 
     @PostMapping("/join")
-    public String joinTeam(@RequestParam Team team, @AuthenticationPrincipal CurrentUser currentUser) {
+    public String joinTeam(@RequestParam String teamName, Model model,
+                           @AuthenticationPrincipal CurrentUser currentUser) {
+        Team team = teamService.findByName(teamName);
+        if (team == null) {
+            model.addAttribute("newTeam", new Team());
+            model.addAttribute("invalidTeam", true);
+            return "user/select-team";
+        }
         teamService.createJoinTeamRequest(team, currentUser.getUser());
         return "redirect:/app";
     }

@@ -12,7 +12,6 @@ import pl.coderslab.whereismystuff.item.service.ItemService;
 import pl.coderslab.whereismystuff.location.service.LocationService;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 import pl.coderslab.whereismystuff.team.entity.Team;
-import pl.coderslab.whereismystuff.team.service.TeamService;
 import pl.coderslab.whereismystuff.user.dto.UserDto;
 import pl.coderslab.whereismystuff.user.dto.UserDtoConverter;
 import pl.coderslab.whereismystuff.user.service.UserService;
@@ -26,7 +25,6 @@ public class HomeController {
     private static final String CONFIRMED_PASSWORD_ERROR_CODE = "ConfirmedPassword";
 
     private final UserService userService;
-    private final TeamService teamService;
     private final ItemService itemService;
     private final LocationService locationService;
 
@@ -62,7 +60,6 @@ public class HomeController {
             return "dashboard";
         } else {
             model.addAttribute("newTeam", new Team());
-            model.addAttribute("teams", teamService.findAll());
             return "user/select-team";
         }
     }

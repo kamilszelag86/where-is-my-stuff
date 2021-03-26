@@ -70,19 +70,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Dołącz do zespołu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Dołącz do istniejącego zespołu</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form:form method="post" action="app/team/join">
-                                Wybierz zespół:<br>
-                                <select name="team">
-                                    <c:forEach var="t" items="${teams}">
-                                        <option value="${t.id}">${t.name}</option>
-                                    </c:forEach>
-                                </select><br><br>
+                            <form:form method="post" action="/app/team/join">
+                                Wpisz nazwę zespołu:<br>
+                                <input type="text" name="teamName"><br>
+                                <c:if test="${invalidTeam}">
+                                    <p class="alert-danger">Niepoprawna nazwa zespołu</p>
+                                </c:if>
+                                <br>
                                 <button type="submit" class="btn btn-secondary btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
