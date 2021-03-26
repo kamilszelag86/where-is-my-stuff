@@ -25,6 +25,15 @@
                     </div>
                 </div>
             </div>
+            <form:form method="post" action="/app/team/cancel">
+                <input type="hidden" name="request" value="${user.joinTeamRequest.id}">
+                <button type="submit" class="btn btn-danger btn-icon-split btn-lg">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+                    <span class="text">Wycofaj wniosek</span>
+                </button>
+            </form:form>
         </c:when>
         <c:otherwise>
             <c:if test="${user.joinTeamRequest.rejected}">

@@ -48,6 +48,14 @@ public class TeamController {
         return "redirect:/app";
     }
 
+    @PostMapping("/cancel")
+    public String cancelJoinTeam(@RequestParam("request") JoinTeamRequest request,
+                                 @AuthenticationPrincipal CurrentUser currentUser) {
+        teamService.cancelJoinTeamRequest(request);
+        currentUser.getUser().setJoinTeamRequest(null);
+        return "redirect:/app";
+    }
+
     @PostMapping("/approve")
     public String approve(@RequestParam("request") JoinTeamRequest request) {
         teamService.approveJoinTeamRequest(request);

@@ -16,6 +16,8 @@ public interface TeamService {
 
     void createJoinTeamRequest(Team team, User user);
 
+    void cancelJoinTeamRequest(JoinTeamRequest request);
+
     List<JoinTeamRequest> findAllActiveJoinRequests(Team team);
 
     void approveJoinTeamRequest(JoinTeamRequest request);

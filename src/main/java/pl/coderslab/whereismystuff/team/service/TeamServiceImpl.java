@@ -47,6 +47,11 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public void cancelJoinTeamRequest(JoinTeamRequest request) {
+        joinTeamRequestRepository.delete(request);
+    }
+
+    @Override
     public List<JoinTeamRequest> findAllActiveJoinRequests(Team team) {
         return joinTeamRequestRepository.findAllByTeamAndActiveIsTrue(team);
     }
