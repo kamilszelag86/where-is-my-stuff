@@ -48,6 +48,10 @@
                                 </c:forEach>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Dodane przez</th>
+                            <td>${item.user.firstName} ${item.user.lastName}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

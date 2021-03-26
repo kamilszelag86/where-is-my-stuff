@@ -21,34 +21,42 @@
 
     <!-- Content Row -->
     <div class="row">
-
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered dataTable">
-                        <tr>
-                            <th>Nazwa</th>
-                            <td>${location.name}</td>
-                        </tr>
-                        <tr>
-                            <th>Opis</th>
-                            <td>${location.description}</td>
-                        </tr>
-                        <tr>
-                            <th>Adres</th>
-                            <td>${location.address}</td>
-                        </tr>
-                        <tr>
-                            <th>Ilość przechowywanych przedmiotów</th>
-                            <td>${items.size()}</td>
-                        </tr>
-                    </table>
+        <div class="col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered dataTable">
+                            <tr>
+                                <th>Nazwa</th>
+                                <td>${location.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Opis</th>
+                                <td>${location.description}</td>
+                            </tr>
+                            <tr>
+                                <th>Adres</th>
+                                <td>${location.address}</td>
+                            </tr>
+                            <tr>
+                                <th>Dodana przez</th>
+                                <td>${location.user.firstName} ${location.user.lastName}</td>
+                            </tr>
+                            <tr>
+                                <th>Ilość przechowywanych przedmiotów</th>
+                                <td>${items.size()}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card shadow mb-4">
-            <iframe src="https://maps.google.com/maps?q=${location.address}&output=embed" width="150%" height="100%" style="border:1px" loading="lazy"></iframe>
-        </div>
+
+            <div class="card shadow mb-4 col-xl-5">
+                <iframe src="https://maps.google.com/maps?q=${location.address}&output=embed" width="100%" height="100%"
+                        style="border:1px" loading="lazy"></iframe>
+            </div>
+
     </div>
 
     <div class="row">

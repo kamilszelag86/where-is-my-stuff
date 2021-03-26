@@ -3,6 +3,7 @@ package pl.coderslab.whereismystuff.team.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
@@ -23,18 +24,10 @@ public class TeamController {
     private final TeamService teamService;
     private final UserService userService;
 
-    @ModelAttribute("activeRequests")
-    public List<JoinTeamRequest> activeRequests(@AuthenticationPrincipal CurrentUser currentUser) {
-        return teamService.findAllActiveJoinRequests(currentUser.getUser().getTeam());
-    }
-
-    @ModelAttribute("teamMembers")
-    public List<User> teamMembers(@AuthenticationPrincipal CurrentUser currentUser) {
-        return userService.findAllByTeam(currentUser.getUser().getTeam());
-    }
-
     @GetMapping
-    public String showTeam() {
+    public String showTeam(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        model.addAttribute("activeRequests", teamService.findAllActiveJoinRequests(currentUser.getUser().getTeam()));
+        model.addAttribute("teamMembers", userService.findAllByTeam(currentUser.getUser().getTeam()));
         return "team/show";
     }
 

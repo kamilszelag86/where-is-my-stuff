@@ -129,7 +129,7 @@ public class ItemController {
                            @AuthenticationPrincipal CurrentUser currentUser) {
         try {
             Item item = itemService.findById(itemId);
-            if (!currentUser.getUser().getTeam().equals(item.getTeam())) {
+            if (!item.getTeam().equals(currentUser.getUser().getTeam())) {
                 throw new AccessDeniedException("Access denied");
             }
             model.addAttribute("item", item);

@@ -51,6 +51,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllByTeam(Team team) {
-        return userRepository.findAllByTeam(team);
+        return team == null ? null : userRepository.findAllByTeam(team);
     }
 }

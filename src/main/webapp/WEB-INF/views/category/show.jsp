@@ -34,6 +34,10 @@
                             <th>Opis</th>
                             <td>${category.description}</td>
                         </tr>
+                        <tr>
+                            <th>Dodana przez</th>
+                            <td>${category.user.firstName} ${category.user.lastName} </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -43,7 +47,7 @@
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista przedmiotów w danej lokalizacji</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lista przedmiotów należących do danej kategorii</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
