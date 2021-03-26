@@ -53,10 +53,20 @@ public class TeamController {
         return "redirect:/app";
     }
 
-    @PostMapping("/cancel")
-    public String cancelJoinTeam(@RequestParam("request") JoinTeamRequest request,
+    @PostMapping("/request/cancel")
+    public String cancelJoinTeamRequest(@RequestParam("request") JoinTeamRequest request,
                                  @AuthenticationPrincipal CurrentUser currentUser) {
-        teamService.cancelJoinTeamRequest(request);
+        if (request.isActive()) {
+            teamService.deleteJoinTeamRequest(request);
+            currentUser.getUser().setJoinTeamRequest(null);
+        }
+        return "redirect:/app";
+    }
+
+    @PostMapping("/request/delete")
+    public String deleteJoinTeamRequest(@RequestParam("request") JoinTeamRequest request,
+                                        @AuthenticationPrincipal CurrentUser currentUser) {
+        teamService.deleteJoinTeamRequest(request);
         currentUser.getUser().setJoinTeamRequest(null);
         return "redirect:/app";
     }

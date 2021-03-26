@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <sec:authentication property="principal.user" var="user"/>
@@ -73,6 +74,19 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
+                <c:if test="${user.joinTeamRequest.approved}">
+                    <div class="card border-left-success">
+                        <div class="card-body text-success">
+                            Zostałeś dodany do zespołu: ${user.team.name}
+                        </div>
+                    </div>
+                    <form:form method="post" action="/app/team/request/delete">
+                        <input type="hidden" name="request" value="${user.joinTeamRequest.id}">
+                        <button type="submit" class="btn btn-success btn-circle">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </form:form>
+                </c:if>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">

@@ -47,7 +47,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void cancelJoinTeamRequest(JoinTeamRequest request) {
+    public void deleteJoinTeamRequest(JoinTeamRequest request) {
         joinTeamRequestRepository.delete(request);
     }
 

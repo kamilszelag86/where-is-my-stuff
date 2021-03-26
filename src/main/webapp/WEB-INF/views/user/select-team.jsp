@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <form:form method="post" action="/app/team/cancel">
+            <form:form method="post" action="/app/team/request/cancel">
                 <input type="hidden" name="request" value="${user.joinTeamRequest.id}">
                 <button type="submit" class="btn btn-danger btn-icon-split btn-lg">
                 <span class="icon text-white-50">
