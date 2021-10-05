@@ -56,7 +56,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form:form method="post" action="app/team/create" modelAttribute="newTeam">
+                            <form:form method="post" action="/app/team/create" modelAttribute="newTeam">
                                 Nazwa:<br>
                                 <form:input path="name"/><br>
                                 <form:errors path="name" cssClass="alert-danger"/><br>
