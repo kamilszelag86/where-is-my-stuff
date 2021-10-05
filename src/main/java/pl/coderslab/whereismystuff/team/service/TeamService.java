@@ -12,7 +12,7 @@ public interface TeamService {
 
     List<Team> findAll();
 
-    Team create(Team team);
+    Team create(Team team, User user);
 
     void createJoinTeamRequest(Team team, User user);
 

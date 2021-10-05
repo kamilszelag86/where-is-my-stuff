@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.whereismystuff.security.entity.CurrentUser;
 import pl.coderslab.whereismystuff.team.entity.JoinTeamRequest;
+import pl.coderslab.whereismystuff.team.entity.JoinTeamRequestStatus;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.team.service.TeamService;
 import pl.coderslab.whereismystuff.user.service.UserService;
@@ -35,8 +36,7 @@ public class TeamController {
         if (result.hasErrors()) {
             return "user/select-team";
         }
-        Team created = teamService.create(team);
-        userService.setTeamForUser(created, currentUser.getUser());
+        teamService.create(team, currentUser.getUser());
         return "redirect:/app";
     }
 
@@ -56,7 +56,7 @@ public class TeamController {
     @PostMapping("/request/cancel")
     public String cancelJoinTeamRequest(@RequestParam("request") JoinTeamRequest request,
                                  @AuthenticationPrincipal CurrentUser currentUser) {
-        if (request.isActive()) {
+        if (JoinTeamRequestStatus.ACTIVE.equals(request.getStatus())) {
             teamService.deleteJoinTeamRequest(request);
             currentUser.getUser().setJoinTeamRequest(null);
         }

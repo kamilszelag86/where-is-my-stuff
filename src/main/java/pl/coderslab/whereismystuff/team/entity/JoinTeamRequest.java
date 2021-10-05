@@ -22,10 +22,7 @@ public class JoinTeamRequest {
     @ManyToOne
     private Team team;
 
-    private boolean approved;
-
-    private boolean rejected;
-
-    private boolean active;
+    @Enumerated(EnumType.STRING)
+    private JoinTeamRequestStatus status;
 
 }

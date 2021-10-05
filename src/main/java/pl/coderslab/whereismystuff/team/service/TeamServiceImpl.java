@@ -3,6 +3,7 @@ package pl.coderslab.whereismystuff.team.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.whereismystuff.team.entity.JoinTeamRequest;
+import pl.coderslab.whereismystuff.team.entity.JoinTeamRequestStatus;
 import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.team.repository.JoinTeamRequestRepository;
 import pl.coderslab.whereismystuff.team.repository.TeamRepository;
@@ -30,8 +31,10 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team create(Team team) {
-        return teamRepository.save(team);
+    public Team create(Team team, User user) {
+        Team created = teamRepository.save(team);
+        user.setTeam(created);
+        return created;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class TeamServiceImpl implements TeamService {
         JoinTeamRequest joinTeamRequest = new JoinTeamRequest();
         joinTeamRequest.setTeam(team);
         joinTeamRequest.setUser(user);
-        joinTeamRequest.setActive(true);
+        joinTeamRequest.setStatus(JoinTeamRequestStatus.ACTIVE);
         user.setJoinTeamRequest(joinTeamRequestRepository.save(joinTeamRequest));
     }
 
@@ -53,19 +56,17 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<JoinTeamRequest> findAllActiveJoinRequests(Team team) {
-        return joinTeamRequestRepository.findAllByTeamAndActiveIsTrue(team);
+        return joinTeamRequestRepository.findAllActiveByTeam(team);
     }
 
     @Override
     public void approveJoinTeamRequest(JoinTeamRequest request) {
         request.getUser().setTeam(request.getTeam());
-        request.setApproved(true);
-        request.setActive(false);
+        request.setStatus(JoinTeamRequestStatus.APPROVED);
     }
 
     @Override
     public void rejectJoinTeamRequest(JoinTeamRequest request) {
-        request.setRejected(true);
-        request.setActive(false);
+        request.setStatus(JoinTeamRequestStatus.REJECTED);
     }
 }

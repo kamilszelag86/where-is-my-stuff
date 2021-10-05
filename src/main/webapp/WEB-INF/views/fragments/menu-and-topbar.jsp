@@ -74,7 +74,7 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
-                <c:if test="${user.joinTeamRequest.approved}">
+                <c:if test="${user.joinTeamRequest.status == 'APPROVED'}">
                     <div class="card border-left-success">
                         <div class="card-body text-success">
                             Zostałeś dodany do zespołu: ${user.team.name}

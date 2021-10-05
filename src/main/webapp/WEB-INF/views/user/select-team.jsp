@@ -17,7 +17,7 @@
 <div class="container-fluid">
 
     <c:choose>
-        <c:when test="${user.joinTeamRequest.active}">
+        <c:when test="${user.joinTeamRequest.status == 'ACTIVE'}">
             <div class="row">
                 <div class="card mb-4 py-3 border-bottom-info border-left-info border-info">
                     <div class="card-body text-info">
@@ -36,7 +36,7 @@
             </form:form>
         </c:when>
         <c:otherwise>
-            <c:if test="${user.joinTeamRequest.rejected}">
+            <c:if test="${user.joinTeamRequest.status == 'REJECTED'}">
                 <div class="row">
                     <div class="card mb-4 py-3 border-bottom-danger border-left-danger border-danger">
                         <div class="card-body text-danger">
