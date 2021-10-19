@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="card mb-4 py-3 border-bottom-info border-left-info border-info">
                     <div class="card-body text-info">
-                        Twoja prośba o dołączenie do zespołu ${user.joinTeamRequest.team.name} czeka na akceptację.
+                        <spring:message code="team.your.request"/> ${user.joinTeamRequest.team.name} <spring:message code="request.active"/>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <span class="icon text-white-50">
                     <i class="fas fa-trash"></i>
                 </span>
-                    <span class="text">Wycofaj wniosek</span>
+                    <span class="text"><spring:message code="request.cancel"/></span>
                 </button>
             </form:form>
         </c:when>
@@ -40,31 +40,30 @@
                 <div class="row">
                     <div class="card mb-4 py-3 border-bottom-danger border-left-danger border-danger">
                         <div class="card-body text-danger">
-                            Twoja prośba o dołączenie do zespołu ${user.joinTeamRequest.team.name} została odrzucona.
+                            <spring:message code="team.your.request"/> ${user.joinTeamRequest.team.name} <spring:message code="request.rejected"/>
                         </div>
                     </div>
                 </div>
             </c:if>
             <p class="mb-4">
-                Aby móc korzystać z aplikacji musisz należeć do zespołu.<br>
-                Stwórz nowy zespół lub dołącz do jednego z już istniejących.<br>
+                <spring:message code="team.message"/><br>
             </p>
             <div class="row">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Stwórz nowy zespół</h6>
+                        <h6 class="m-0 font-weight-bold text-primary"><spring:message code="team.create.new"/></h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <form:form method="post" action="/app/team/create" modelAttribute="newTeam">
-                                Nazwa:<br>
+                                <spring:message code="name"/>:<br>
                                 <form:input path="name"/><br>
                                 <form:errors path="name" cssClass="alert-danger"/><br>
                                 <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
-                                    <span class="text">Stwórz zespół</span>
+                                    <span class="text"><spring:message code="team.create"/></span>
                                 </button>
                             </form:form>
                         </div>
@@ -74,22 +73,22 @@
             <div class="row">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Dołącz do istniejącego zespołu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary"><spring:message code="team.join.existing"/></h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <form:form method="post" action="/app/team/join">
-                                Wpisz nazwę zespołu:<br>
+                                <spring:message code="team.name.input"/>:<br>
                                 <input type="text" name="teamName"><br>
                                 <c:if test="${invalidTeam}">
-                                    <p class="alert-danger">Niepoprawna nazwa zespołu</p>
+                                    <p class="alert-danger"><spring:message code="team.invalid.name"/></p>
                                 </c:if>
                                 <br>
                                 <button type="submit" class="btn btn-secondary btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
-                                    <span class="text">Dołącz do zespołu</span>
+                                    <span class="text"><spring:message code="team.join"/></span>
                                 </button>
                             </form:form>
                         </div>

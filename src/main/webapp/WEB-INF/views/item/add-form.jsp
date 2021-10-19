@@ -18,35 +18,36 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Dodaj nowy przedmiot</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><spring:message code="item.add.new"/></h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                <spring:message code="location.select.label" var="label"/>
                 <form:form method="post" modelAttribute="item" enctype="multipart/form-data">
                     <form:hidden path="user.id" value="${user.id}"/>
                     <form:hidden path="team.id" value="${user.team.id}"/>
-                    Nazwa:<br>
+                    <spring:message code="name"/>:<br>
                     <form:input path="name"/><br>
                     <form:errors path="name" cssClass="alert-danger"/><br>
-                    Opis:<br>
+                    <spring:message code="description"/>:<br>
                     <form:input path="description"/><br><br>
-                    Lokalizacja:<br>
+                    <spring:message code="location"/>:<br>
                     <form:select path="location">
-                        <form:option value="0" label="--Wybierz lokalizację--"/>
+                        <form:option value="0" label="${label}"/>
                         <form:options items="${locations}" itemLabel="name" itemValue="id"/>
                     </form:select><br><br>
-                    Kategorie:<br>
+                    <spring:message code="categories"/>:<br>
                     <form:checkboxes path="categories" items="${categories}" itemLabel="name" itemValue="id"
                                      delimiter="<br>"/><br><br>
-                    Dodaj zdjęcie przedmiotu:<br>
+                    <spring:message code="item.add.image"/>:<br>
                     <input type="file" name="image" accept="image/*"/><br><br>
-                    Dodaj zdjęcie paragonu:<br>
+                    <spring:message code="item.add.receipt"/>:<br>
                     <input type="file" name="receipt" accept="image/*"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
-                        <span class="text">Zapisz</span>
+                        <span class="text"><spring:message code="save"/></span>
                     </button>
                 </form:form>
             </div>

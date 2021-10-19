@@ -16,7 +16,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Szczegóły kategorii</h1>
+        <h1 class="h3 mb-0 text-gray-800"><spring:message code="category.details"/></h1>
     </div>
 
     <!-- Content Row -->
@@ -27,15 +27,15 @@
                 <div class="table-responsive">
                     <table class="table table-bordered dataTable">
                         <tr>
-                            <th>Nazwa</th>
+                            <th><spring:message code="name"/></th>
                             <td>${category.name}</td>
                         </tr>
                         <tr>
-                            <th>Opis</th>
+                            <th><spring:message code="description"/></th>
                             <td>${category.description}</td>
                         </tr>
                         <tr>
-                            <th>Dodana przez</th>
+                            <th><spring:message code="added.by"/></th>
                             <td>${category.user.firstName} ${category.user.lastName} </td>
                         </tr>
                     </table>
@@ -47,27 +47,28 @@
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista przedmiotów należących do danej kategorii</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="category.items.list"/></h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Zdjęcie</th>
-                            <th>Opis</th>
-                            <th>Lokalizacja</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="image"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="location"/></th>
+                            <th><spring:message code="actions"/></th>
+
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Zdjęcie</th>
-                            <th>Opis</th>
-                            <th>Lokalizacja</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="image"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="location"/></th>
+                            <th><spring:message code="actions"/></th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -83,14 +84,14 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                        <span class="text">Edytuj</span>
+                                        <span class="text"><spring:message code="edit"/></span>
                                     </a>
                                     <a href="<c:url value="/app/item/delete/${item.id}"/>"
                                        class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                        <span class="text">Usuń</span>
+                                        <span class="text"><spring:message code="delete"/></span>
                                     </a>
                                 </td>
                             </tr>

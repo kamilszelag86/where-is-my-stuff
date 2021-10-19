@@ -15,7 +15,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Czy na pewno chcesz usunąć kategorię??</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><spring:message code="category.delete.confirm"/></h6>
         </div>
         <div class="card-body">
             <div class="chart-bar">
@@ -23,7 +23,7 @@
                         <span class="icon text-gray-600">
                           <i class="fas fa-arrow-right"></i>
                         </span>
-                    <span class="text">NIE</span>
+                    <span class="text"><spring:message code="no.button"/></span>
                 </a><br><br>
                 <form:form method="post" action="./">
                     <input type="hidden" name="categoryId" value="${categoryId}">
@@ -31,7 +31,7 @@
                         <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                                     </span>
-                        <span class="text">TAK</span>
+                        <span class="text"><spring:message code="yes.button"/></span>
                     </button>
                 </form:form>
             </div>

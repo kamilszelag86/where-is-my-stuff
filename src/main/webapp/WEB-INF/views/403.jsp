@@ -19,8 +19,8 @@
     <!-- 403 Error Text -->
     <div class="text-center">
         <div class="error mx-auto" data-text="403">403</div>
-        <p class="lead text-gray-800 mb-5">Dostęp zabroniony</p>
-        <a href="<c:url value="/app"/>">&larr; Back to Dashboard</a>
+        <p class="lead text-gray-800 mb-5"><spring:message code="forbidden"/></p>
+        <a href="<c:url value="/app"/>"><spring:message code="forbidden.back"/></a>
     </div>
 
 </div>

@@ -16,7 +16,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Szczegóły przedmiotu</h1>
+        <h1 class="h3 mb-0 text-gray-800"><spring:message code="item.details"/></h1>
     </div>
 
     <!-- Content Row -->
@@ -27,21 +27,21 @@
                 <div class="table-responsive">
                     <table class="table table-bordered dataTable">
                         <tr>
-                            <th>Nazwa</th>
+                            <th><spring:message code="name"/></th>
                             <td>${item.name}</td>
                         </tr>
                         <tr>
-                            <th>Opis</th>
+                            <th><spring:message code="description"/></th>
                             <td>${item.description}</td>
                         </tr>
                         <tr>
-                            <th>Lokalizacja</th>
+                            <th><spring:message code="location"/></th>
                             <td>
                                 <a href="<c:url value="/app/location/show/${item.location.id}"/>">${item.location.name}</a>
                             </td>
                         </tr>
                         <tr>
-                            <th>Kategorie</th>
+                            <th><spring:message code="categories"/></th>
                             <td>
                                 <c:forEach var="category" items="${item.categories}">
                                     <a href="<c:url value="/app/category/show/${category.id}"/>">${category.name}</a><br>
@@ -49,7 +49,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Dodane przez</th>
+                            <th><spring:message code="added.by"/></th>
                             <td>${item.user.firstName} ${item.user.lastName}</td>
                         </tr>
                     </table>
@@ -60,7 +60,7 @@
         <!-- Illustrations -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Zdjęcie</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="image"/></h6>
             </div>
             <div class="card-body">
                 <div class="text-center">
@@ -72,13 +72,13 @@
                         <c:otherwise>
                             <form:form action="/app/item/image" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="item" value="${item.id}"/>
-                                Dodaj zdjęcie przedmiotu:<br><br>
+                                <spring:message code="item.add.image"/>:<br><br>
                                 <input type="file" name="image" accept="image/*"/><br><br>
                                 <button type="submit" class="btn btn-success btn-icon-split btn-sm">
                                     <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                     </span>
-                                    <span class="text">Zapisz zdjęcie</span>
+                                    <span class="text"><spring:message code="save"/></span>
                                 </button>
                             </form:form>
                         </c:otherwise>
@@ -91,7 +91,7 @@
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Paragon</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="receipt"/></h6>
             </div>
             <div class="card-body">
                 <div class="text-center">
@@ -103,13 +103,13 @@
                         <c:otherwise>
                             <form:form action="/app/item/receipt" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="item" value="${item.id}"/>
-                                Dodaj zdjęcie paragonu:<br><br>
+                                <spring:message code="item.add.receipt"/>:<br><br>
                                 <input type="file" name="receipt" accept="image/*"/><br><br>
                                 <button type="submit" class="btn btn-success btn-icon-split btn-sm">
                                     <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                     </span>
-                                    <span class="text">Zapisz zdjęcie</span>
+                                    <span class="text"><spring:message code="save"/></span>
                                 </button>
                             </form:form>
                         </c:otherwise>

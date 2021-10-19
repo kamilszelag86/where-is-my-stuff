@@ -18,29 +18,29 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-arrow-right"></i>
                     </span>
-        <span class="text">Dodaj lokalizację</span>
+        <span class="text"><spring:message code="location.add"/></span>
     </a><br><br>
     <!-- DataTales Example -->
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista lokalizacji</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="location.list"/></h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Opis</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="actions"/></th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Opis</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="actions"/></th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -56,14 +56,14 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                        <span class="text">Edytuj</span>
+                                        <span class="text"><spring:message code="edit"/></span>
                                     </a>
                                     <a href="<c:url value="/app/location/delete/${location.id}"/>"
                                        class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                        <span class="text">Usuń</span>
+                                        <span class="text"><spring:message code="delete"/></span>
                                     </a>
                                 </td>
                             </tr>

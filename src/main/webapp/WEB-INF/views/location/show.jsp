@@ -16,7 +16,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Szczegóły lokalizacji</h1>
+        <h1 class="h3 mb-0 text-gray-800"><spring:message code="location.details"/></h1>
     </div>
 
     <!-- Content Row -->
@@ -27,23 +27,23 @@
                     <div class="table-responsive">
                         <table class="table table-bordered dataTable">
                             <tr>
-                                <th>Nazwa</th>
+                                <th><spring:message code="name"/></th>
                                 <td>${location.name}</td>
                             </tr>
                             <tr>
-                                <th>Opis</th>
+                                <th><spring:message code="description"/></th>
                                 <td>${location.description}</td>
                             </tr>
                             <tr>
-                                <th>Adres</th>
+                                <th><spring:message code="address"/></th>
                                 <td>${location.address}</td>
                             </tr>
                             <tr>
-                                <th>Dodana przez</th>
+                                <th><spring:message code="added.by"/></th>
                                 <td>${location.user.firstName} ${location.user.lastName}</td>
                             </tr>
                             <tr>
-                                <th>Ilość przechowywanych przedmiotów</th>
+                                <th><spring:message code="items.count"/><th>
                                 <td>${items.size()}</td>
                             </tr>
                         </table>
@@ -62,27 +62,27 @@
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista przedmiotów w danej lokalizacji</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="location.items.list"/></h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Zdjęcie</th>
-                            <th>Opis</th>
-                            <th>Kategorie</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="image"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="categories"/></th>
+                            <th><spring:message code="actions"/></th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Zdjęcie</th>
-                            <th>Opis</th>
-                            <th>Kategorie</th>
-                            <th>Akcje</th>
+                            <th><spring:message code="name"/></th>
+                            <th><spring:message code="image"/></th>
+                            <th><spring:message code="description"/></th>
+                            <th><spring:message code="categories"/></th>
+                            <th><spring:message code="actions"/></th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -102,14 +102,14 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                        <span class="text">Edytuj</span>
+                                        <span class="text"><spring:message code="edit"/></span>
                                     </a>
                                     <a href="<c:url value="/app/item/delete/${item.id}"/>"
                                        class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                        <span class="text">Usuń</span>
+                                        <span class="text"><spring:message code="delete"/></span>
                                     </a>
                                 </td>
                             </tr>

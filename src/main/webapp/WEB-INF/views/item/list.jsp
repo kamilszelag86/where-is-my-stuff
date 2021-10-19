@@ -18,15 +18,14 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-arrow-right"></i>
                     </span>
-        <span class="text">Dodaj przedmiot</span>
+        <span class="text"><spring:message code="item.add"/></span>
     </a><br><br>
 
     <div class="row">
         <form:form method="post" action="/app/item/location">
-            <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Lista posiadanych przedmiotów</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><spring:message code="item.list"/></h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -34,23 +33,23 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Nazwa</th>
-                                <th>Zdjęcie</th>
-                                <th>Opis</th>
-                                <th>Lokalizacja</th>
-                                <th>Kategorie</th>
-                                <th>Akcje</th>
+                                <th><spring:message code="name"/></th>
+                                <th><spring:message code="image"/></th>
+                                <th><spring:message code="description"/></th>
+                                <th><spring:message code="location"/></th>
+                                <th><spring:message code="categories"/></th>
+                                <th><spring:message code="actions"/></th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th></th>
-                                <th>Nazwa</th>
-                                <th>Zdjęcie</th>
-                                <th>Opis</th>
-                                <th>Lokalizacja</th>
-                                <th>Kategorie</th>
-                                <th>Akcje</th>
+                                <th><spring:message code="name"/></th>
+                                <th><spring:message code="image"/></th>
+                                <th><spring:message code="description"/></th>
+                                <th><spring:message code="location"/></th>
+                                <th><spring:message code="categories"/></th>
+                                <th><spring:message code="actions"/></th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -74,14 +73,14 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                            <span class="text">Edytuj</span>
+                                            <span class="text"><spring:message code="edit"/></span>
                                         </a>
                                         <a href="<c:url value="/app/item/delete/${item.id}"/>"
                                            class="btn btn-danger btn-icon-split">
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                            <span class="text">Usuń</span>
+                                            <span class="text"><spring:message code="delete"/></span>
                                         </a>
                                     </td>
                                 </tr>
@@ -91,13 +90,18 @@
                     </div>
                 </div>
             </div>
-            Wybierz lokalizację:<br>
+            <spring:message code="location.select"/>:<br>
             <select name="location">
                 <c:forEach var="location" items="${locations}">
                     <option value="${location.id}">${location.name}</option>
                 </c:forEach>
-            </select><br><br>
-            <input type="submit" value="Przenieś zaznaczone"/>
+            </select>
+            <button type="submit" class="btn btn-success btn-icon-split btn-lg">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                <span class="text"><spring:message code="move.selected"/></span>
+            </button>
         </form:form>
     </div>
 </div>

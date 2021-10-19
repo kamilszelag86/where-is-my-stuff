@@ -17,10 +17,10 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Twój zespół: ${user.team.name}</h1>
+    <h1 class="h3 mb-4 text-gray-800"><spring:message code="team.your"/>: ${user.team.name}</h1>
 
-    <p class="mb-4">Ilość wszystkich przedmiotów: ${itemCount}</p>
-    <p class="mb-4">Ilość wszystkich lokalizacji: ${locationCount}</p>
+    <p class="mb-4"><spring:message code="items.count"/>: ${itemCount}</p>
+    <p class="mb-4"><spring:message code="locations.count"/>: ${locationCount}</p>
 
 </div>
 <!-- /.container-fluid -->

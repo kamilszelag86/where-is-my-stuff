@@ -18,7 +18,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Twój zespół: ${user.team.name}</h1>
+        <h1 class="h3 mb-0 text-gray-800"><spring:message code="team.your"/>: ${user.team.name}</h1>
     </div>
 
     <c:if test="${not empty activeRequests}">
@@ -26,17 +26,17 @@
         <div class="row">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Wnioski o dołączenie:</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><spring:message code="team.requests"/>:</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Użytkownik</th>
-                                <th>Imię</th>
-                                <th>Nazwisko</th>
-                                <th>Akcje</th>
+                                <th><spring:message code="user"/></th>
+                                <th><spring:message code="form.firstname"/></th>
+                                <th><spring:message code="form.lastname"/></th>
+                                <th><spring:message code="actions"/></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -52,7 +52,7 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-check"></i>
                                                 </span>
-                                                <span class="text">Zaakceptuj</span>
+                                                <span class="text"><spring:message code="accept"/></span>
                                             </button>
                                         </form:form>
                                         <form:form method="post" action="/app/team/reject">
@@ -61,7 +61,7 @@
                                                 <span class="icon text-white-50">
                                                 <i class="fas fa-trash"></i>
                                                 </span>
-                                                <span class="text">Odrzuć</span>
+                                                <span class="text"><spring:message code="reject"/></span>
                                             </button>
                                         </form:form>
                                     </td>
@@ -79,16 +79,16 @@
     <div class="row">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Członkowie zespołu:</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><spring:message code="team.members"/>:</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Użytkownik</th>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
+                            <th><spring:message code="user"/></th>
+                            <th><spring:message code="form.firstname"/></th>
+                            <th><spring:message code="form.lastname"/></th>
                         </tr>
                         </thead>
                         <tbody>

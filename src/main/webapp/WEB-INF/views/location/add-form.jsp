@@ -18,26 +18,26 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Dodaj nową lokalizację</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><spring:message code="location.add.new"/></h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <form:form method="post" modelAttribute="location">
                     <form:hidden path="user.id" value="${user.id}"/>
                     <form:hidden path="team.id" value="${user.team.id}"/>
-                    Nazwa:<br>
+                    <spring:message code="name"/>:<br>
                     <form:input path="name"/><br>
                     <form:errors path="name" cssClass="alert-danger"/><br>
-                    Opis:<br>
+                    <spring:message code="description"/>:<br>
                     <form:input path="description"/><br><br>
-                    Address:<br>
+                    <spring:message code="address"/>:<br>
                     <form:input path="address"/><br>
                     <form:errors path="address" cssClass="alert-danger"/><br><br>
                     <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
-                        <span class="text">Zapisz</span>
+                        <span class="text"><spring:message code="save"/></span>
                     </button>
                 </form:form>
             </div>
