@@ -8,6 +8,8 @@ import pl.coderslab.whereismystuff.team.entity.Team;
 import pl.coderslab.whereismystuff.team.repository.JoinTeamRequestRepository;
 import pl.coderslab.whereismystuff.team.repository.TeamRepository;
 import pl.coderslab.whereismystuff.user.entity.User;
+import pl.coderslab.whereismystuff.user.repository.UserRepository;
+import pl.coderslab.whereismystuff.user.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TeamServiceImpl implements TeamService {
 
     private final TeamRepository teamRepository;
     private final JoinTeamRequestRepository joinTeamRequestRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Team findByName(String teamName) {
@@ -34,6 +37,7 @@ public class TeamServiceImpl implements TeamService {
     public Team create(Team team, User user) {
         Team created = teamRepository.save(team);
         user.setTeam(created);
+        userRepository.save(user);
         return created;
     }
 
