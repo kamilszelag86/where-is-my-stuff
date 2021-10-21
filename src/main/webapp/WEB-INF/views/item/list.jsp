@@ -21,8 +21,9 @@
         <span class="text"><spring:message code="item.add"/></span>
     </a><br><br>
 
-    <div class="row">
-        <form:form method="post" action="/app/item/location">
+    <form:form method="post" action="/app/item/location">
+        <div class="row">
+
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary"><spring:message code="item.list"/></h6>
@@ -90,20 +91,24 @@
                     </div>
                 </div>
             </div>
-            <spring:message code="location.select"/>:<br>
-            <select name="location">
-                <c:forEach var="location" items="${locations}">
-                    <option value="${location.id}">${location.name}</option>
-                </c:forEach>
-            </select>
-            <button type="submit" class="btn btn-success btn-icon-split btn-lg">
+        </div>
+        <div class="row">
+            <div class="card shadow mb-4">
+                <label class="text-center" for="location-to-move"><spring:message code="location.select"/>:</label>
+                <select class="form-control" name="location" id="location-to-move">
+                    <c:forEach var="location" items="${locations}">
+                        <option value="${location.id}">${location.name}</option>
+                    </c:forEach>
+                </select>
+                <button type="submit" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
-                <span class="text"><spring:message code="move.selected"/></span>
-            </button>
-        </form:form>
-    </div>
+                    <span class="text"><spring:message code="move.selected"/></span>
+                </button>
+            </div>
+        </div>
+    </form:form>
 </div>
 <!-- /.container-fluid -->
 
