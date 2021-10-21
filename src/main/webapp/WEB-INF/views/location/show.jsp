@@ -43,7 +43,7 @@
                                 <td>${location.user.firstName} ${location.user.lastName}</td>
                             </tr>
                             <tr>
-                                <th><spring:message code="items.count"/><th>
+                                <th><spring:message code="items.count"/></th>
                                 <td>${items.size()}</td>
                             </tr>
                         </table>

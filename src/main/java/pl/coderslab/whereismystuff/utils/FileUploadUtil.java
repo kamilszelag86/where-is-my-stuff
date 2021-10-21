@@ -36,7 +36,9 @@ public class FileUploadUtil {
             Path toDelete = Paths.get(filePath);
             Files.delete(toDelete);
         } catch (IOException e) {
-            throw new IOException("Could not delete image file: " + filePath, e);
+            // Not throwing exception because Heroku deletes all saved files on shutdown.
+            // When user tries to re-upload a file exception occurs because there is no file to delete
+//            throw new IOException("Could not delete image file: " + filePath, e);
         }
     }
 
